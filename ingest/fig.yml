@@ -1,0 +1,5 @@
+srs:
+  image: ziyan/srs
+  volumes:
+  - "data:/data"
+  command: srs -c /data/srs.conf
