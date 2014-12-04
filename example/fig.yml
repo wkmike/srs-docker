@@ -1,8 +1,0 @@
-srs:
-  image: ziyan/srs
-  ports:
-  - "1935:1935"
-  - "80:80"
-  volumes:
-  - "data:/data"
-  command: srs -c /data/srs.conf
