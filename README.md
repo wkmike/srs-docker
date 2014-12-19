@@ -47,3 +47,4 @@ The setup for this example is a bit more involved due to the need to support bot
   But we also spawn multiple cdn machines of our own using this configuration to provide for viewers inside China where cloudfront is unstable.
   Using this setup, we can scale up our max bandwidth without stressing the srs server.
 
+![hsfztv](https://cdn.hsfztv.net/media/dance-2014-screenshot.png)
