@@ -13,6 +13,7 @@ docker get ziyan/srs:latest
 ```
 
 Two main executables are available inside the container:
+
 1. **srs**: The simple rtmp server binary, takes a configuration file, see examples.
 2. **ffmpeg**: Used by srs, but also useful for directly streaming and transcoding video/audio of various format.
 
