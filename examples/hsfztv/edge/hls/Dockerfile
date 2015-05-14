@@ -1,4 +1,4 @@
-FROM ziyan/srs
+FROM ossrs/srs:1.0.beta
 
 ADD hls.conf /etc/hls.conf
 

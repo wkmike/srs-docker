@@ -1,5 +1,5 @@
 srs:
-  image: ziyan/srs
+  image: ossrs/srs:1.0.beta
   volumes:
   - "data:/data"
   command: srs -c /data/srs.conf

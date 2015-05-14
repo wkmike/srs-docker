@@ -1,4 +1,4 @@
-FROM ziyan/srs
+FROM ossrs/srs:1.0.beta
 
 ADD distribute.conf /etc/distribute.conf
 

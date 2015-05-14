@@ -9,7 +9,7 @@ Usage
 ----
 
 ```
-docker get ziyan/srs:latest
+docker get ossrs/srs:1.0.beta
 ```
 
 Two main executables are available inside the container:
