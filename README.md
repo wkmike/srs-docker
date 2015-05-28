@@ -9,7 +9,7 @@ Usage
 ----
 
 ```
-docker get ossrs/srs:1.0.beta
+docker pull ossrs/srs:1.0.beta
 ```
 
 Two main executables are available inside the container:
