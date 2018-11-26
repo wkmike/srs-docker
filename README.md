@@ -27,15 +27,15 @@ docker pull ossrs/srs:[tag]
 You have to export the container port ( or use 3rd-party tcp proxy ) of SRS. [For more information about port mapping](https://docs.docker.com/network/links/#connect-using-network-port-mapping).
 
 A typical usage:
-```
-docker run ossrs/srs:3.0 -p 1935:1935 -p 1985:1985 -p 8080:8080
+```Shell
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3.0
 ```
 
 And you can specify the launch command and params such as the configuration file. By default it will launch `objs/srs -c conf/docker.conf`.
 
 Example:
-```
-docker run ossrs/srs:3.0 -p 1935:1935 -p 1985:1985 -p 8080:8080 objs/srs -c my-custom.conf
+```Shell
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 objs/srs -c my-custom.conf ossrs/srs:3.0
 ```
 
 ### Configuration
@@ -45,13 +45,13 @@ There is a default configuration that in the `/srs/conf/docker.conf`.
 You can use [**docker volume**](https://docs.docker.com/storage/volumes/) to override it.
 
 Example:
-```
-docker run ossrs/srs:3.0 -v ./my-custom.conf:/srs/conf/docker.conf
+```Shell
+docker run -v ./my-custom.conf:/srs/conf/docker.conf ossrs/srs:3.0
 ```
 
 Or mount a folder & start with custom configration file name:
-```
-docker run ossrs/srs:3.0 -v ./my-conf.d:/srs objs/srs -c /srs/my-conf.d/custom.conf
+```Shell
+docker run -v ./my-conf.d:/srs objs/srs -c /srs/my-conf.d/custom.conf ossrs/srs:3.0
 ```
 
 Examples
