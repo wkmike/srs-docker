@@ -35,7 +35,7 @@ And you can specify the launch command and params such as the configuration file
 
 Example:
 ```Shell
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 objs/srs -c my-custom.conf ossrs/srs:3.0
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3.0 objs/srs -c my-custom.conf
 ```
 
 ### Configuration
@@ -51,7 +51,7 @@ docker run -v ./my-custom.conf:/srs/conf/docker.conf ossrs/srs:3.0
 
 Or mount a folder & start with custom configration file name:
 ```Shell
-docker run -v ./my-conf.d:/srs objs/srs -c /srs/my-conf.d/custom.conf ossrs/srs:3.0
+docker run -v ./my-conf.d:/srs ossrs/srs:3.0 objs/srs -c /srs/my-conf.d/custom.conf
 ```
 
 Examples
