@@ -28,7 +28,7 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 
 ./configure && make
 ```
 
-** Run SRS in docker**
+**Run SRS in docker**
 
 ```
 ./objs/srs -c conf/console.conf
