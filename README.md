@@ -1,9 +1,8 @@
 srs
 ===
-A dockerized [Simple RTMP Server](https://github.com/winlinvip/simple-rtmp-server).
+A dockerized [SRS](https://github.com/ossrs/srs).
 This is a much better solution than Wowza or Adobe Flash Media Server.
 It allows for sophisticated custom live streaming setups.
-Big thanks to [winlin](https://github.com/winlinvip), author of srs, for making this possible.
 
 Usage
 ---
