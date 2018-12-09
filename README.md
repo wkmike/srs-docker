@@ -4,9 +4,14 @@ A dockerized [SRS](https://github.com/ossrs/srs).
 
 ## Usage
 
+**Install docker**
+
+Download docker from [here](https://www.docker.com/products/docker-desktop) then start docker.
+
 **Build docker image**
 
 ```
+git clone https://github.com/ossrs/srs-docker.git && cd srs-docker && git checkout centos &&
 docker build -f Dockerfile -t srs:dev .
 ```
 
