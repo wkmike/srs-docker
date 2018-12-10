@@ -1,6 +1,7 @@
 srs
 ===
-A dockerized [SRS](https://github.com/ossrs/srs).
+
+CentOS docker for [SRS](https://github.com/ossrs/srs) developer.
 
 ## Usage
 
