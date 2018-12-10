@@ -46,3 +46,9 @@ RUN git config --global alias.co checkout && \
 	git config --global alias.st status && \
 	git config --global alias.sm submodule
 
+# Openssl
+ADD openssl-1.1.0e.tar.bz2 /tmp
+RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
+
+# For ifconfig
+RUN yum install -y net-tools

@@ -40,5 +40,6 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 
 
 ## Features
 
-- [x] FFMPEG/4.1 with x264/157
+- [x] OpenSSL 1.1.0e
+- [x] FFMPEG 4.1 with x264 core.157
 - [x] GIT
