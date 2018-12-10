@@ -11,8 +11,7 @@ Download docker from [here](https://www.docker.com/products/docker-desktop) then
 **Build docker image**
 
 ```
-git clone https://github.com/ossrs/srs-docker.git && cd srs-docker && git checkout centos &&
-docker build -f Dockerfile -t srs:dev .
+docker pull ossrs/dev
 ```
 
 **Clone SRS**
@@ -24,7 +23,7 @@ git clone https://github.com/ossrs/srs.git && cd srs
 **Start docker**
 
 ```
-docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 srs:dev bash
+docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/dev bash
 ```
 
 **Build SRS in docker**
@@ -39,3 +38,7 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 
 ./objs/srs -c conf/console.conf
 ```
 
+## Features
+
+- [x] FFMPEG/4.1 with x264/157
+- [x] GIT
