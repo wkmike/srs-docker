@@ -52,3 +52,7 @@ RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make ins
 
 # For ifconfig
 RUN yum install -y net-tools
+
+# For GDB
+RUN yum install -y gdb
+
