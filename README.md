@@ -49,6 +49,10 @@ dockerID=`echo $dockerID |awk '{print $1}'` &&
 docker exec -it $dockerID bash
 ```
 
+## GDB
+
+To run docker with `--privileged` for GDB, or it fail for error `Cannot create process: Operation not permitted`.
+
 ## Features
 
 - [x] OpenSSL 1.1.0e
