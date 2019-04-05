@@ -39,6 +39,16 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 
 ./objs/srs -c conf/console.conf
 ```
 
+## EXEC
+
+To enter your container:
+
+```
+dockerID=`docker ps --format "{{.ID}} {{.Image}}"|grep 'ossrs/dev'` &&
+dockerID=`echo $dockerID |awk '{print $1}'` &&
+docker exec -it $dockerID bash
+```
+
 ## Features
 
 - [x] OpenSSL 1.1.0e
