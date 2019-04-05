@@ -24,7 +24,7 @@ git clone https://github.com/ossrs/srs.git && cd srs
 **Start docker**
 
 ```
-docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/dev bash
+docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/dev bash
 ```
 
 **Build SRS in docker**
@@ -52,6 +52,15 @@ docker exec -it $dockerID bash
 ## GDB
 
 To run docker with `--privileged` for GDB, or it fail for error `Cannot create process: Operation not permitted`.
+
+## Api Server
+
+To run api-server at 8085 in docker:
+
+```
+(cd objs/CherryPy-3.2.4 && python setup.py install --user) &&
+python research/api-server/server.py 8085
+```
 
 ## Features
 
