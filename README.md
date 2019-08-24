@@ -45,12 +45,12 @@ You can use [**docker volume**](https://docs.docker.com/storage/volumes/) to ove
 
 Example:
 ```Shell
-docker run -v ./my-custom.conf:/srs/conf/docker.conf ossrs/srs:3.0
+docker run -v /path/to/my-custom.conf:/srs/conf/docker.conf ossrs/srs:3.0
 ```
 
 Or mount a folder & start with custom configration file name:
 ```Shell
-docker run -v ./my-conf.d:/srs ossrs/srs:3.0 objs/srs -c /srs/my-conf.d/custom.conf
+docker run -v /path/to/my-conf.d:/srs ossrs/srs:3.0 objs/srs -c /srs/my-conf.d/custom.conf
 ```
 
 Examples
