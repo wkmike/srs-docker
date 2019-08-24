@@ -39,7 +39,7 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3.0 objs/srs -c my-c
 
 ### Configuration
 
-There is a default configuration that in the `/srs/conf/docker.conf`.
+There is a default configuration at `/srs/conf/docker.conf`.
 
 You can use [**docker volume**](https://docs.docker.com/storage/volumes/) to override it.
 
