@@ -45,8 +45,7 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk \
 To enter your container:
 
 ```
-dockerID=`docker ps --format "{{.ID}} {{.Image}}"|grep 'ossrs/dev'` &&
-dockerID=`echo $dockerID |awk '{print $1}'` &&
+dockerID=`docker ps --format "{{.ID}} {{.Image}}" |grep 'ossrs/dev' |awk '{print $1}'` &&
 docker exec -it $dockerID bash
 ```
 
