@@ -24,7 +24,8 @@ git clone https://github.com/ossrs/srs.git && cd srs
 **Start docker**
 
 ```
-docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/dev bash
+docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk \
+  -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/dev bash
 ```
 
 **Build SRS in docker**
