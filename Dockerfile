@@ -56,3 +56,13 @@ RUN yum install -y net-tools
 # For GDB
 RUN yum install -y gdb
 
+# For Go
+ADD go1.13.1.linux-amd64.tar.gz /usr/local
+ENV PATH $PATH:/usr/local/go/bin
+
+# For debug
+RUN yum install -y lsof tree dstat
+
+# For lsb_release
+RUN yum install -y redhat-lsb
+
