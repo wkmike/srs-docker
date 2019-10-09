@@ -66,6 +66,7 @@ python research/api-server/server.py 8085
 
 ## Features
 
+- [x] v0.3, Go, dstat, lsb_release.
 - [x] v0.2, NetTools, GDB.
 - [x] v0.2, OpenSSL 1.1.0e
 - [x] v0.1, FFMPEG 4.1 with x264 core.157
