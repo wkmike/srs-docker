@@ -15,7 +15,7 @@ Download docker from [here](https://www.docker.com/products/docker-desktop) then
 docker pull ossrs/dev
 ```
 
-> Remark: The iamges list is [here](https://hub.docker.com/r/ossrs/dev/tags).
+> Remark: The image list is [here](https://hub.docker.com/r/ossrs/dev/tags).
 
 **Clone SRS**
 
