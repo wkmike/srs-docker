@@ -21,6 +21,8 @@ build: source
 	@docker build -t ${IMGS} -f Dockerfile .
 	@echo docker tag ${IMGS} ${LATEST}
 	@docker tag ${IMGS} ${LATEST}
+	@echo docker tag ${LATEST} ${NAME}:latest
+	@docker tag ${LATEST} ${NAME}:latest
 
 push:
 	@echo "Push ${IMGS} ${TAG}"
@@ -28,6 +30,8 @@ push:
 	@docker push ${IMGS}
 	@echo docker push ${LATEST}
 	@docker push ${LATEST}
+	@echo docker push ${NAME}:latest
+	@docker push ${NAME}:latest
 
 variables:
 	@echo "NAME: ${NAME}"
