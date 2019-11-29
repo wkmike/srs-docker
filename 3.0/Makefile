@@ -9,7 +9,7 @@ all: source build
 source:
 	@echo "Prepare branch"
 	@(cd ../srs && git checkout 3.0release && git pull)
-	@(cd ../srs && git checkout ${TAG})
+	@(cd ../srs && git checkout ${TAG} >/dev/null 2>/dev/null)
 	@echo "Compress source files"
 	@(cd .. && rm -f srs.tar.bz2 && tar jcf srs.tar.bz2 srs)
 	@(rm -f srs.tar.bz2 && mv ../srs.tar.bz2 .)
