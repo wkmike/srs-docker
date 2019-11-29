@@ -1,54 +1,56 @@
-srs
-===
-A dockerized [SRS](https://github.com/ossrs/srs).
-This is a much better solution than Wowza or Adobe Flash Media Server.
-It allows for sophisticated custom live streaming setups.
+# SRS
 
-Usage
----
-```
-docker pull ossrs/srs:[tag]
-```
+The docker images for [SRS](https://github.com/ossrs/srs).
 
-### Tags
+## SRS2
 
-* `latest`, `2`, `2.0`, `2.0release`:
-  This is the latest build of [**2.0release**](https://github.com/ossrs/srs/tree/2.0release) branch.
-* `develop`, `3`, `3.0`, `3.0release`:
-  This is the latest build of [**3.0release**](https://github.com/ossrs/srs/tree/3.0release) branch.
-* specified version:
-  You can specify a version like `2.0.250`, `3.0.40` as tag.
-* with ffmpeg:
-  By default, all builds do not contain ffmpeg binary. You can add suffix `-ffmpeg` after any tag if you want to use ffmpeg. (ex: `3.0-ffmpeg`)
+For [SRS2](https://github.com/ossrs/srs/tree/2.0release) and [tags](https://github.com/ossrs/srs/tags).
 
-### Run
+To start SRS by [srs.conf](https://github.com/ossrs/srs-docker/blob/master/2.0/srs.conf):
 
-You have to export the container port ( or use 3rd-party tcp proxy ) of SRS. [For more information about port mapping](https://docs.docker.com/network/links/#connect-using-network-port-mapping).
-
-A typical usage:
-```Shell
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3.0
+```bash
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
 ```
 
-And you can specify the launch command and params such as the configuration file. By default it will launch `objs/srs -c conf/docker.conf`.
+To overwrite the config by `/path/of/yours.conf`:
 
-Example:
-```Shell
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3.0 objs/srs -c my-custom.conf
+```bash
+docker run -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
 ```
 
-### Configuration
+Or mount a config directory and use `/path/of/yours.conf`:
 
-There is a default configuration at `/srs/conf/docker.conf`.
-
-You can use [**docker volume**](https://docs.docker.com/storage/volumes/) to override it.
-
-Example:
-```Shell
-docker run -v /path/to/my-custom.conf:/srs/conf/docker.conf ossrs/srs:3.0
+```bash
+docker run -v /path/of:/usr/local/srs/conf/ -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2 ./objs/srs -c conf/yours.conf
 ```
 
-Or mount a folder & start with custom configration file name:
-```Shell
-docker run -v /path/to/my-conf.d:/srs ossrs/srs:3.0 objs/srs -c /srs/my-conf.d/custom.conf
+## SRS3
+
+For [SRS3](https://github.com/ossrs/srs/tree/3.0release) and [tags](https://github.com/ossrs/srs/tags).
+
+To start SRS by [srs.conf](https://github.com/ossrs/srs-docker/blob/master/3.0/srs.conf):
+
+```bash
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3
 ```
+
+To overwrite the config by `/path/of/yours.conf`:
+
+```bash
+docker run -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3
+```
+
+Or mount a config directory and use `/path/of/yours.conf`:
+
+```bash
+docker run -v /path/of:/usr/local/srs/conf/ -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3 ./objs/srs -c conf/yours.conf
+```
+
+## Debug
+
+For debuggging:
+
+* Check files of docker: ```docker run -it ossrs/srs:3 bash```
+* Use gdb to debug SRS, please use [dev](https://github.com/ossrs/srs-docker/tree/dev#usage).
+
+Winlin 2019.11
