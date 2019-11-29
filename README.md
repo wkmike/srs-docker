@@ -15,13 +15,15 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
 To overwrite the config by `/path/of/yours.conf`:
 
 ```bash
-docker run -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
+docker run -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf \
+    -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
 ```
 
 Or mount a config directory and use `/path/of/yours.conf`:
 
 ```bash
-docker run -v /path/of:/usr/local/srs/conf/ -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2 ./objs/srs -c conf/yours.conf
+docker run -v /path/of:/usr/local/srs/conf/ \
+    -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2 ./objs/srs -c conf/yours.conf
 ```
 
 ## SRS3
@@ -37,13 +39,15 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3
 To overwrite the config by `/path/of/yours.conf`:
 
 ```bash
-docker run -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3
+docker run -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf \
+    -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3
 ```
 
 Or mount a config directory and use `/path/of/yours.conf`:
 
 ```bash
-docker run -v /path/of:/usr/local/srs/conf/ -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3 ./objs/srs -c conf/yours.conf
+docker run -v /path/of:/usr/local/srs/conf/ \
+    -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:3 ./objs/srs -c conf/yours.conf
 ```
 
 ## Debug
