@@ -17,8 +17,8 @@ source:
 
 build: source
 	@echo "Build ${TAG}"
-	@echo docker build -t ${IMGS} -f Dockerfile .
-	@docker build -t ${IMGS} -f Dockerfile .
+	@echo docker build -t ${IMGS} --build-arg tag=${TAG} -f Dockerfile .
+	@docker build -t ${IMGS} --build-arg tag=${TAG} -f Dockerfile .
 	@echo docker tag ${IMGS} ${LATEST}
 	@docker tag ${IMGS} ${LATEST}
 

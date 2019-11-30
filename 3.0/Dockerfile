@@ -1,11 +1,15 @@
+# https://docs.docker.com/engine/reference/builder/#arg
+ARG tag=v3.0-a2
 
 FROM centos:7 AS build
+ARG tag
 RUN yum install -y gcc make gcc-c++ patch unzip perl
-ADD srs.tar.bz2 /tmp/
-RUN cd /tmp/srs/trunk && ./configure && make && make install
+ADD https://github.com/ossrs/srs/archive/${tag}.tar.gz /tmp/
+RUN cd /tmp/${tag}/trunk && ./configure && make && make install
 COPY conf /usr/local/srs/conf
 
 FROM centos:7 AS dist
+ARG tag
 EXPOSE 1935 1985 8080
 COPY --from=build /usr/local/srs /usr/local/srs
 WORKDIR /usr/local/srs
