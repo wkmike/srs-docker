@@ -52,9 +52,10 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 
 ## Aliyun
 
-Use docker images in [AliyunCR](https://cr.console.aliyun.com/), 
-please replace `ossrs/srs` by `registry.cn-hangzhou.aliyuncs.com/ossrs/srs`,
-for example:
+To use docker images in [AliyunCR](https://cr.console.aliyun.com/), 
+please use `registry.cn-hangzhou.aliyuncs.com/ossrs/srs`.
+
+For example:
 
 ```bash
 docker run registry.cn-hangzhou.aliyuncs.com/ossrs/srs:3
