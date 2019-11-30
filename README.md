@@ -98,7 +98,8 @@ Play stream from edge:
 ffmpeg -f flv -i rtmp://127.0.0.1/live/livestream -f flv -y /dev/null
 ```
 
-We could stop serverA or serverB, the edge will retry for failover and the streaming should still work as usual.
+If serverA is working, we can stop it then restart the publisher, 
+then edge will choose serverB and stream to it.
 
 ## Debug
 
