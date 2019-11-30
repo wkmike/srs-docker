@@ -4,7 +4,7 @@ ARG tag=v3.0-a2
 FROM centos:7 AS build
 ARG tag
 RUN yum install -y gcc make gcc-c++ patch unzip perl
-RUN cd /tmp && git clone --depth=1 --branch ${tag} srs
+RUN cd /tmp && git clone --depth=1 --branch ${tag} https://gitee.com/winlinvip/srs.oschina.git srs
 RUN cd /tmp/srs/trunk && ./configure && make && make install
 COPY conf /usr/local/srs/conf
 
