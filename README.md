@@ -24,6 +24,8 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
     ossrs/srs:2
 ```
 
+> Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
+
 ## SRS3
 
 For [SRS3](https://github.com/ossrs/srs/tree/3.0release) and [tags](https://github.com/ossrs/srs/tags).
@@ -45,6 +47,8 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
     -v /path/of/yours.log:/usr/local/srs/objs/srs.log \
     ossrs/srs:3
 ```
+
+> Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
 
 ## Debug
 
