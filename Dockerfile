@@ -1,5 +1,5 @@
 # https://docs.docker.com/engine/reference/builder/#arg
-ARG tag=v2.0-r7
+ARG tag=v3.0-a2
 
 FROM centos:7 AS build
 ARG tag
