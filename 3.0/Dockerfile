@@ -4,8 +4,8 @@ ARG tag=v3.0-a2
 FROM centos:7 AS build
 ARG tag
 RUN yum install -y gcc make gcc-c++ patch unzip perl
-ADD https://github.com/ossrs/srs/archive/${tag}.tar.gz /tmp/
-RUN cd /tmp/${tag}/trunk && ./configure && make && make install
+RUN cd /tmp && git clone --depth=1 --branch ${tag} srs
+RUN cd /tmp/srs/trunk && ./configure && make && make install
 COPY conf /usr/local/srs/conf
 
 FROM centos:7 AS dist
