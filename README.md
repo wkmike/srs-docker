@@ -98,8 +98,8 @@ Play stream from edge:
 ffmpeg -f flv -i rtmp://127.0.0.1/live/livestream -f flv -y /dev/null
 ```
 
-If serverA is working, we can stop it then restart the publisher, 
-then edge will choose serverB and stream to it.
+If now streaming to serverA, we can stop it then restart the publisher, 
+then the edge will choose serverB and stream to it.
 
 ## Debug
 
