@@ -13,7 +13,7 @@ source:
 	@echo "Compress source files"
 	@(cd .. && rm -f srs.tar.bz2 && tar jcf srs.tar.bz2 srs)
 	@(rm -f srs.tar.bz2 && mv ../srs.tar.bz2 .)
-	@(cd ../srs && git checkout 2.0release)
+	@(cd ../srs && git checkout 3.0release)
 
 build: source
 	@echo "Build ${TAG}"
