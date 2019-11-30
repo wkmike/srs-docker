@@ -62,7 +62,7 @@ cd srs-docker/3.0
 Start origin serverA:
 
 ```bash
-HostIP=`../auto/get_host_ip.sh` &&
+HostIP=`./auto/get_host_ip.sh` &&
 docker run -p 19350:19350 -p 9090:9090 --add-host=docker:${HostIP} \
     -v `pwd`/conf/origin.cluster.serverA.conf:/usr/local/srs/conf/srs.conf \
     ossrs/srs:3
@@ -71,7 +71,7 @@ docker run -p 19350:19350 -p 9090:9090 --add-host=docker:${HostIP} \
 Start origin serverB:
 
 ```bash
-HostIP=`../auto/get_host_ip.sh` &&
+HostIP=`./auto/get_host_ip.sh` &&
 docker run -p 19351:19351 -p 9091:9091 --add-host=docker:${HostIP} \
     -v `pwd`/conf/origin.cluster.serverB.conf:/usr/local/srs/conf/srs.conf \
     ossrs/srs:3
@@ -80,7 +80,7 @@ docker run -p 19351:19351 -p 9091:9091 --add-host=docker:${HostIP} \
 Start edge server:
 
 ```bash
-HostIP=`../auto/get_host_ip.sh` &&
+HostIP=`./auto/get_host_ip.sh` &&
 docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 --add-host=docker:${HostIP} \
     -v `pwd`/conf/origin.cluster.edge.conf:/usr/local/srs/conf/srs.conf \
     ossrs/srs:3
@@ -89,7 +89,7 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 --add-host=docker:${HostIP} \
 Publish stream to edge server(or any origin server):
 
 ```bash
-ffmpeg -re -i ../srs/trunk/doc/source.200kbps.768x320.flv -c copy -f flv rtmp://127.0.0.1/live/livestream
+ffmpeg -re -i doc/source.200kbps.768x320.flv -c copy -f flv rtmp://127.0.0.1/live/livestream
 ```
 
 Play stream from edge:
