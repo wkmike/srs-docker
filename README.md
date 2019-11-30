@@ -52,10 +52,12 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 
 ## Aliyun
 
-To start SRS:
+Use docker images in [AliyunCR](https://cr.console.aliyun.com/), 
+please replace `ossrs/srs` by `registry.cn-hangzhou.aliyuncs.com/ossrs/srs`,
+for example:
 
 ```bash
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 registry.cn-hangzhou.aliyuncs.com/ossrs/srs:3
+docker run registry.cn-hangzhou.aliyuncs.com/ossrs/srs:3
 ```
 
 ## Origin Cluster
@@ -114,6 +116,7 @@ then the edge will choose serverB and stream to it.
 For debuggging:
 
 * Check files of docker: ```docker run -it ossrs/srs bash```
+* Use specified versions: ```docker run -it ossrs/srs:v3.0-a2 bash```
 * Use gdb to debug SRS, please use [dev](https://github.com/ossrs/srs-docker/tree/dev#usage).
 
 Winlin 2019.11
