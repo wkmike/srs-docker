@@ -105,7 +105,7 @@ then the edge will choose serverB and stream to it.
 
 For debuggging:
 
-* Check files of docker: ```docker run -it ossrs/srs:3 bash```
+* Check files of docker: ```docker run -it ossrs/srs bash```
 * Use gdb to debug SRS, please use [dev](https://github.com/ossrs/srs-docker/tree/dev#usage).
 
 Winlin 2019.11
