@@ -50,6 +50,14 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 
 > Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
 
+## Aliyun
+
+To start SRS:
+
+```bash
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 registry.cn-hangzhou.aliyuncs.com/ossrs/srs:3
+```
+
 ## Origin Cluster
 
 Download config and script files:
