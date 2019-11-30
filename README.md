@@ -50,6 +50,56 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 
 > Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
 
+## Origin Cluster
+
+Download config and script files:
+
+```bash
+git clone https://github.com/ossrs/srs-docker.git &&
+cd srs-docker/3.0
+```
+
+Start origin serverA:
+
+```bash
+HostIP=`../auto/get_host_ip.sh` &&
+docker run -p 19350:19350 -p 9090:9090 --add-host=docker:${HostIP} \
+    -v `pwd`/conf/origin.cluster.serverA.conf:/usr/local/srs/conf/srs.conf \
+    ossrs/srs:3
+```
+
+Start origin serverB:
+
+```bash
+HostIP=`../auto/get_host_ip.sh` &&
+docker run -p 19351:19351 -p 9091:9091 --add-host=docker:${HostIP} \
+    -v `pwd`/conf/origin.cluster.serverB.conf:/usr/local/srs/conf/srs.conf \
+    ossrs/srs:3
+```
+
+Start edge server:
+
+```bash
+HostIP=`../auto/get_host_ip.sh` &&
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 --add-host=docker:${HostIP} \
+    -v `pwd`/conf/origin.cluster.edge.conf:/usr/local/srs/conf/srs.conf \
+    ossrs/srs:3
+```
+
+Publish stream to edge server(or any origin server):
+
+```bash
+ffmpeg -re -i ../srs/trunk/doc/source.200kbps.768x320.flv -c copy -f flv rtmp://127.0.0.1/live/livestream
+```
+
+Play stream from edge:
+
+```bash
+ffmpeg -f flv -i rtmp://127.0.0.1/live/livestream -f flv -y /dev/null
+```
+
+We could stop serverA or serverB, the edge will retry for failover and the streaming should still work as usual.
+
 ## Debug
 
 For debuggging:
