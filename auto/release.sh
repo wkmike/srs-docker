@@ -98,10 +98,8 @@ else
   sed -i "s|^ARG tag=.*$|ARG tag=${SRS_TAG}|g" Dockerfile
 fi
 
-SRS_GITHUB=https://github.com/ossrs/srs.git
-SRS_GITEE=https://gitee.com/winlinvip/srs.oschina.git
-
 # For docker hub.
+SRS_GITHUB=https://github.com/ossrs/srs.git
 if [[ $MACOS == YES ]]; then
   sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
 else
@@ -116,4 +114,35 @@ echo "Cleanup tag $SRS_TAG for docker"
 
 git tag $SRS_TAG && git push origin $SRS_TAG
 echo "Create new tag $SRS_TAG for docker"
+
+# For aliyun hub.
+SRS_GITEE=https://gitee.com/winlinvip/srs.oschina.git
+if [[ $MACOS == YES ]]; then
+  sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITEE}|g" Dockerfile
+else
+  sed -i "s|^ARG url=.*$|ARG url=${SRS_GITEE}|g" Dockerfile
+fi
+
+git commit -am "Release $SRS_TAG to docker hub" && git push
+echo "Commit changes of tag $SRS_TAG for aliyun"
+
+git tag -d release-v$SRS_TAG && git push aliyun :release-v$SRS_TAG
+echo "Cleanup tag $SRS_TAG for aliyun"
+
+git tag release-v$SRS_TAG && git push aliyun release-v$SRS_TAG
+echo "Create new tag $SRS_TAG for aliyun"
+
+git tag -d release-v$SRS_MAJOR && git push aliyun :release-v$SRS_MAJOR
+echo "Cleanup tag $SRS_MAJOR for aliyun"
+
+git tag release-v$SRS_MAJOR && git push aliyun release-v$SRS_MAJOR
+echo "Create new tag $SRS_MAJOR for aliyun"
+
+if [[ $SRS_MAJOR == 2 ]]; then
+  git tag -d release-vlatest && git push aliyun :release-vlatest
+  echo "Cleanup tag latest for aliyun"
+
+  git tag release-vlatest && git push aliyun release-vlatest
+  echo "Create new tag latest for aliyun"
+fi
 
