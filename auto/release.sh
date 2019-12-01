@@ -108,9 +108,12 @@ else
   sed -i "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
 fi
 
+git commit -am "Release $SRS_TAG to docker hub" && git push
+echo "Commit changes of tag $SRS_TAG for docker"
+
 git tag -d $SRS_TAG && git push origin :$SRS_TAG
 echo "Cleanup tag $SRS_TAG for docker"
 
-git commit -am "Release $SRS_TAG to docker hub" && git push &&
 git tag $SRS_TAG && git push origin $SRS_TAG
+echo "Create new tag $SRS_TAG for docker"
 
