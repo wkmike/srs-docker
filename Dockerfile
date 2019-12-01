@@ -1,5 +1,5 @@
 # https://docs.docker.com/engine/reference/builder/#arg
-ARG tag=v3.0-a2
+ARG tag=v3.0-a3
 ARG url=https://github.com/ossrs/srs.git
 
 FROM centos:7 AS build
