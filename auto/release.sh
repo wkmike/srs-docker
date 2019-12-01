@@ -98,3 +98,19 @@ else
   sed -i "s|^ARG tag=.*$|ARG tag=${SRS_TAG}|g" Dockerfile
 fi
 
+SRS_GITHUB=https://github.com/ossrs/srs.git
+SRS_GITEE=https://gitee.com/winlinvip/srs.oschina.git
+
+# For docker hub.
+if [[ $MACOS == YES ]]; then
+  sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
+else
+  sed -i "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
+fi
+
+git tag -d $SRS_TAG && git push origin :$SRS_TAG
+echo "Cleanup tag $SRS_TAG for docker"
+
+git commit -am "Release $SRS_TAG to docker hub" && git push &&
+git tag $SRS_TAG && git push origin $SRS_TAG
+
