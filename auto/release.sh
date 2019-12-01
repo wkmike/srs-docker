@@ -60,7 +60,7 @@ if [[ -z $SRS_TAG ]]; then
   fi
 fi
 
-SRS_MAJOR=`echo "v2.0-r6"|sed 's/^v//g'|awk -F '.' '{print $1}' 2>&1`
+SRS_MAJOR=`echo $SRS_TAG|sed 's/^v//g'|awk -F '.' '{print $1}' 2>&1`
 if [[ $? -ne 0 ]]; then
   echo "Invalid major version $SRS_MAJOR"
   exit -1
@@ -106,13 +106,13 @@ else
   sed -i "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
 fi
 
-git commit -am "Release $SRS_TAG to docker hub" && git push
+git commit -am "Release $SRS_TAG to docker hub"; git push
 echo "Commit changes of tag $SRS_TAG for docker"
 
-git tag -d $SRS_TAG && git push origin :$SRS_TAG
+git tag -d $SRS_TAG; git push origin :$SRS_TAG
 echo "Cleanup tag $SRS_TAG for docker"
 
-git tag $SRS_TAG && git push origin $SRS_TAG
+git tag $SRS_TAG; git push origin $SRS_TAG
 echo "Create new tag $SRS_TAG for docker"
 
 # For aliyun hub.
@@ -123,26 +123,26 @@ else
   sed -i "s|^ARG url=.*$|ARG url=${SRS_GITEE}|g" Dockerfile
 fi
 
-git commit -am "Release $SRS_TAG to docker hub" && git push
+git commit -am "Release $SRS_TAG to docker hub"; git push
 echo "Commit changes of tag $SRS_TAG for aliyun"
 
-git tag -d release-v$SRS_TAG && git push aliyun :release-v$SRS_TAG
+git tag -d release-v$SRS_TAG; git push aliyun :release-v$SRS_TAG
 echo "Cleanup tag $SRS_TAG for aliyun"
 
-git tag release-v$SRS_TAG && git push aliyun release-v$SRS_TAG
+git tag release-v$SRS_TAG; git push aliyun release-v$SRS_TAG
 echo "Create new tag $SRS_TAG for aliyun"
 
-git tag -d release-v$SRS_MAJOR && git push aliyun :release-v$SRS_MAJOR
+git tag -d release-v$SRS_MAJOR; git push aliyun :release-v$SRS_MAJOR
 echo "Cleanup tag $SRS_MAJOR for aliyun"
 
-git tag release-v$SRS_MAJOR && git push aliyun release-v$SRS_MAJOR
+git tag release-v$SRS_MAJOR; git push aliyun release-v$SRS_MAJOR
 echo "Create new tag $SRS_MAJOR for aliyun"
 
 if [[ $SRS_MAJOR == 2 ]]; then
-  git tag -d release-vlatest && git push aliyun :release-vlatest
+  git tag -d release-vlatest; git push aliyun :release-vlatest
   echo "Cleanup tag latest for aliyun"
 
-  git tag release-vlatest && git push aliyun release-vlatest
+  git tag release-vlatest; git push aliyun release-vlatest
   echo "Create new tag latest for aliyun"
 fi
 
