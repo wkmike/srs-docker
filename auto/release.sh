@@ -5,6 +5,28 @@ SRS_GIT=$HOME/git/srs
 SRS_TAG=
 SRS_MAJOR=
 
+# linux shell color support.
+RED="\\033[31m"
+GREEN="\\033[32m"
+YELLOW="\\033[33m"
+BLACK="\\033[0m"
+
+function NICE() {
+    echo -e "${GREEN}$@${BLACK}"
+}
+
+function TRACE() {
+    echo -e "${BLACK}$@${BLACK}"
+}
+
+function WARN() {
+    echo -e "${YELLOW}$@${BLACK}"
+}
+
+function ERROR() {
+    echo -e "${RED}$@${BLACK}"
+}
+
 ##################################################################################
 ##################################################################################
 ##################################################################################
@@ -79,7 +101,7 @@ END
     exit 0
 fi
 
-echo "Build docker for fitler=$SRS_FILTER of $SRS_GIT, tag is $SRS_TAG, major=$SRS_MAJOR"
+NICE "Build docker for fitler=$SRS_FILTER of $SRS_GIT, tag is $SRS_TAG, major=$SRS_MAJOR"
 
 OS=`python -mplatform 2>&1`
 MACOS=NO && CENTOS=NO && UBUNTU=NO && CENTOS7=NO
@@ -99,6 +121,8 @@ else
 fi
 
 # For docker hub.
+NICE "docker hub $SRS_TAG"
+
 SRS_GITHUB=https://github.com/ossrs/srs.git
 if [[ $MACOS == YES ]]; then
   sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
@@ -116,6 +140,8 @@ git tag $SRS_TAG; git push origin $SRS_TAG
 echo "Create new tag $SRS_TAG for docker"
 
 # For aliyun hub.
+NICE "aliyun hub release-v$SRS_TAG"
+
 SRS_GITEE=https://gitee.com/winlinvip/srs.oschina.git
 if [[ $MACOS == YES ]]; then
   sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITEE}|g" Dockerfile
@@ -132,6 +158,8 @@ echo "Cleanup tag $SRS_TAG for aliyun"
 git tag release-v$SRS_TAG; git push aliyun release-v$SRS_TAG
 echo "Create new tag $SRS_TAG for aliyun"
 
+NICE "aliyun hub release-v$SRS_MAJOR"
+
 git tag -d release-v$SRS_MAJOR; git push aliyun :release-v$SRS_MAJOR
 echo "Cleanup tag $SRS_MAJOR for aliyun"
 
@@ -139,6 +167,7 @@ git tag release-v$SRS_MAJOR; git push aliyun release-v$SRS_MAJOR
 echo "Create new tag $SRS_MAJOR for aliyun"
 
 if [[ $SRS_MAJOR == 2 ]]; then
+  NICE "aliyun hub release-vlatest"
   git tag -d release-vlatest; git push aliyun :release-vlatest
   echo "Cleanup tag latest for aliyun"
 
