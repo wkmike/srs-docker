@@ -37,7 +37,7 @@ For example:
 docker run registry.cn-hangzhou.aliyuncs.com/ossrs/srs:3
 ```
 
-> Note: All [tags](https://hub.docker.com/repository/docker/ossrs/srs/tags?page=1) are available in aliyun CR and it's strongly recommended for much faster.
+> Note: Strongly recommend to use AliyunCR, because it's is much faster and has all [tags](https://hub.docker.com/repository/docker/ossrs/srs/tags?page=1).
 
 ## SRS2
 
