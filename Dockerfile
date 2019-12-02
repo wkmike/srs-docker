@@ -47,7 +47,7 @@ COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 
-RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb
+RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip
 
 ADD go1.13.1.linux-amd64.tar.gz /usr/local
 ENV PATH $PATH:/usr/local/go/bin
