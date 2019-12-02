@@ -19,7 +19,7 @@ docker pull ossrs/dev
 **Clone SRS**
 
 ```
-git clone https://github.com/ossrs/srs.git && cd srs
+git clone https://github.com/ossrs/srs.git && cd srs && git checkout 3.0release
 ```
 
 **Start docker**
