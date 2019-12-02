@@ -54,3 +54,5 @@ RUN cd /usr/local && \
     curl -L -O https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz && \
     tar xf go1.13.1.linux-amd64.tar.gz && \
     rm -f go1.13.1.linux-amd64.tar.gz
+
+RUN yum install -y zip
