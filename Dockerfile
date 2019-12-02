@@ -28,7 +28,7 @@ RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && \
 	--enable-libspeex --enable-pthreads --extra-libs=-lpthread --enable-encoders \
 	--enable-decoders --enable-avfilter --enable-muxers --enable-demuxers && \
     (cd /usr/local/lib && mkdir -p tmp && mv *.so* *.la tmp && echo "Force use static libraries") && \
-	make && make install && echo "FFMPEG build and install successfully" &&
+	make && make install && echo "FFMPEG build and install successfully" && \
     (cd /usr/local/lib && mv tmp/* . && rmdir tmp)
 
 # Openssl for SRS
@@ -47,7 +47,7 @@ COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 
-RUN yum install -y net-tools gdb lsof tree dstat redhat-lsb
+RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb
 
 ADD go1.13.1.linux-amd64.tar.gz /usr/local
 ENV PATH $PATH:/usr/local/go/bin
