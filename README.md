@@ -1,5 +1,4 @@
-srs
-===
+# srs-docker
 
 CentOS docker for [SRS](https://github.com/ossrs/srs) developer.
 
