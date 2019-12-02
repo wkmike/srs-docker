@@ -29,6 +29,8 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
   -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/dev bash
 ```
 
+> Note: Recommend to use [AliyunCR](https://cr.console.aliyun.com/) `registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev`, because it's much faster.
+
 **Build SRS in docker**
 
 ```
