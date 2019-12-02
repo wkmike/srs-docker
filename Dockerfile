@@ -51,6 +51,6 @@ RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unz
 
 ENV PATH $PATH:/usr/local/go/bin
 RUN cd /usr/local && \
-    curl -L -O https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz /usr/local && \
+    curl -L -O https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz && \
     tar xf go1.13.1.linux-amd64.tar.gz && \
     rm -f go1.13.1.linux-amd64.tar.gz
