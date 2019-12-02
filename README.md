@@ -2,30 +2,6 @@
 
 The docker images for [SRS](https://github.com/ossrs/srs).
 
-## SRS2
-
-For [SRS2](https://github.com/ossrs/srs/tree/2.0release) and [tags](https://github.com/ossrs/srs/tags).
-
-To start SRS:
-
-```bash
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
-```
-
-* config file: /usr/local/srs/conf/srs.conf
-* log file: /usr/local/srs/objs/srs.log
-
-To overwrite the config by `/path/of/yours.conf` and gather log to `/path/of/yours.log`:
-
-```bash
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
-    -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf \
-    -v /path/of/yours.log:/usr/local/srs/objs/srs.log \
-    ossrs/srs:2
-```
-
-> Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
-
 ## SRS3
 
 For [SRS3](https://github.com/ossrs/srs/tree/3.0release) and [tags](https://github.com/ossrs/srs/tags).
@@ -60,6 +36,32 @@ For example:
 ```bash
 docker run registry.cn-hangzhou.aliyuncs.com/ossrs/srs:3
 ```
+
+> Note: All [tags](https://hub.docker.com/repository/docker/ossrs/srs/tags?page=1) are available in aliyun CR and it's strongly recommended for much faster.
+
+## SRS2
+
+For [SRS2](https://github.com/ossrs/srs/tree/2.0release) and [tags](https://github.com/ossrs/srs/tags).
+
+To start SRS:
+
+```bash
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
+```
+
+* config file: /usr/local/srs/conf/srs.conf
+* log file: /usr/local/srs/objs/srs.log
+
+To overwrite the config by `/path/of/yours.conf` and gather log to `/path/of/yours.log`:
+
+```bash
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
+    -v /path/of/yours.conf:/usr/local/srs/conf/srs.conf \
+    -v /path/of/yours.log:/usr/local/srs/objs/srs.log \
+    ossrs/srs:2
+```
+
+> Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
 
 ## Origin Cluster
 
