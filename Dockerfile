@@ -50,5 +50,7 @@ COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip
 
 ENV PATH $PATH:/usr/local/go/bin
-ADD https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz /usr/local
-RUN (cd /usr/local && tar xf go1.13.1.linux-amd64.tar.gz && rm -f go1.13.1.linux-amd64.tar.gz)
+RUN cd /usr/local && \
+    curl -L -O https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz /usr/local && \
+    tar xf go1.13.1.linux-amd64.tar.gz && \
+    rm -f go1.13.1.linux-amd64.tar.gz
