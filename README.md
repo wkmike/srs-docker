@@ -1,6 +1,6 @@
 # srs-docker
 
-<script type="text/javascript" src="https://srs.cn-beijing.log.aliyuncs.com/logstores/ossrs-net/track_ua.gif?APIVersion=0.6.0&site=github.com&path=/docker/dev"></script>
+![](https://srs.cn-beijing.log.aliyuncs.com/logstores/ossrs-net/track_ua.gif?APIVersion=0.6.0&site=github.com&path=/docker/dev)
 [![](https://cloud.githubusercontent.com/assets/2777660/22814959/c51cbe72-ef92-11e6-81cc-32b657b285d5.png)](https://github.com/ossrs/srs/wiki/v1_CN_Contact#wechat)
 
 CentOS docker for [SRS](https://github.com/ossrs/srs) developer.
