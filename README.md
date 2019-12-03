@@ -1,5 +1,7 @@
 # srs-docker
 
+<img src='https://srs.cn-beijing.log.aliyuncs.com/logstores/ossrs-net/track_ua.gif?APIVersion=0.6.0&site=github.com&path=/docker/dev6'/>
+
 CentOS docker for [SRS](https://github.com/ossrs/srs) developer.
 
 ## Usage
@@ -26,10 +28,10 @@ git clone https://github.com/ossrs/srs.git && cd srs
 
 ```
 docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
-  -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/dev bash
+  -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/srs:dev6 bash
 ```
 
-> Note: Recommend to use [AliyunCR](https://cr.console.aliyun.com/) `registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev`, because it's much faster.
+> Note: Recommend to use [AliyunCR](https://cr.console.aliyun.com/) `registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev6`, because it's much faster.
 
 **Build SRS in docker**
 
@@ -48,7 +50,7 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
 To enter your container:
 
 ```
-dockerID=`docker ps --format "{{.ID}} {{.Image}}" |grep 'ossrs/dev' |awk '{print $1}'` &&
+dockerID=`docker ps --format "{{.ID}} {{.Image}}" |grep 'ossrs/srs:dev6' |awk '{print $1}'` &&
 docker exec -it $dockerID bash
 ```
 
