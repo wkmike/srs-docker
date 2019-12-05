@@ -37,6 +37,8 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 
 > Note: You should create the log file by ```mkdir -p /path/of && touch /path/of/yours.log```, then start SRS.
 
+> Note: How to write the correct config file, please read wiki([CN](https://github.com/ossrs/srs/wiki/v2_CN_Home)/[EN](https://github.com/ossrs/srs/wiki/v2_EN_Home)).
+
 ## Debug
 
 For debuggging:
