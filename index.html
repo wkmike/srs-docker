@@ -1,0 +1,19 @@
+
+<html>
+<head>
+    <title>SRS</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<h3>It works!</h3>
+<p>
+    Click <a id="en" href="#">here</a> to enter SRS console.<br/>
+    点击进入<a id="cn" href="#">SRS控制台</a>
+</p>
+<p><a href="https://github.com/ossrs/srs">SRS Team &copy; 2019</a></p>
+<script type="text/javascript">
+    var url = window.location.protocol + "//" + window.location.hostname + ":1985/console";
+    document.getElementById("en").setAttribute('href', url);
+    document.getElementById("cn").setAttribute('href', url);
+</script>
+</body>
