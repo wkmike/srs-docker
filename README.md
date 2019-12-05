@@ -15,7 +15,7 @@ To start SRS:
 docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 ossrs/srs:2
 ```
 
-All right, you can:
+After SRS is running, you can:
 
 * Publish stream to SRS by ```ffmpeg -re -i doc/source.200kbps.768x320.flv -c copy -f flv rtmp://127.0.0.1/live/livestream```
 * Play stream from SRS by ```ffmpeg -f flv -i rtmp://127.0.0.1/live/livestream -f flv -y /dev/null```
