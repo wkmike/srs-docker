@@ -47,7 +47,8 @@ COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 
-RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip
+# Note that git is very important for codecov to discover the .codecov.yml
+RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git
 
 ENV PATH $PATH:/usr/local/go/bin
 RUN cd /usr/local && \
