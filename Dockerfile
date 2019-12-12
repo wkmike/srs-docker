@@ -50,8 +50,12 @@ COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 # Note that git is very important for codecov to discover the .codecov.yml
 RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git
 
+# Install cherrypy for HTTP hooks.
+ADD CherryPy-3.2.4.tar.gz2 /tmp
+RUN cd /tmp/CherryPy-3.2.4 && python setup.py install
+
 ENV PATH $PATH:/usr/local/go/bin
 RUN cd /usr/local && \
-    curl -L -O https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz && \
-    tar xf go1.13.1.linux-amd64.tar.gz && \
-    rm -f go1.13.1.linux-amd64.tar.gz
+    curl -L -O https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz && \
+    tar xf go1.13.5.linux-amd64.tar.gz && \
+    rm -f go1.13.5.linux-amd64.tar.gz
