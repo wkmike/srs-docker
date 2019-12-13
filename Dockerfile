@@ -1,6 +1,6 @@
 # https://docs.docker.com/engine/reference/builder/#arg
 ARG tag=v3.0-a4
-ARG url=https://github.com/ossrs/srs.git
+ARG url=https://gitee.com/winlinvip/srs.oschina.git
 
 FROM centos:7 AS build
 ARG tag
