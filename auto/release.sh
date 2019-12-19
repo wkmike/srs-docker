@@ -58,7 +58,7 @@ if [[ $? -ne 0 ]]; then
   exit -1
 fi
 
-if [[ "v${SRS_BRANCH}" -ne "${SRS_FILTER}.0release" ]]; then
+if [[ "v${SRS_BRANCH}" != "${SRS_FILTER}.0release" ]]; then
   echo "Invalid branch $SRS_BRANCH in $SRS_GIT for release $SRS_FILTER"
   exit -1
 fi
