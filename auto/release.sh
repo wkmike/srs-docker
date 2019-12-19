@@ -120,10 +120,10 @@ fi
 git commit -am "Release $SRS_TAG to docker hub" && git push
 echo "Commit changes of tag $SRS_TAG for docker"
 
-git tag -d $SRS_TAG && git push origin :$SRS_TAG
+git tag -d $SRS_TAG
 echo "Cleanup tag $SRS_TAG for docker"
 
-git tag $SRS_TAG && git push origin $SRS_TAG
+git tag $SRS_TAG && git push -f origin $SRS_TAG
 echo "Create new tag $SRS_TAG for docker"
 
 # For aliyun hub.
@@ -137,23 +137,23 @@ fi
 git commit -am "Release $SRS_TAG to docker hub" && git push
 echo "Commit changes of tag $SRS_TAG for aliyun"
 
-git tag -d release-v$SRS_TAG && git push aliyun :release-v$SRS_TAG
+git tag -d release-v$SRS_TAG
 echo "Cleanup tag $SRS_TAG for aliyun"
 
-git tag release-v$SRS_TAG && git push aliyun release-v$SRS_TAG
+git tag release-v$SRS_TAG && git push -f aliyun release-v$SRS_TAG
 echo "Create new tag $SRS_TAG for aliyun"
 
-git tag -d release-v$SRS_MAJOR && git push aliyun :release-v$SRS_MAJOR
+git tag -d release-v$SRS_MAJOR
 echo "Cleanup tag $SRS_MAJOR for aliyun"
 
-git tag release-v$SRS_MAJOR && git push aliyun release-v$SRS_MAJOR
+git tag release-v$SRS_MAJOR && git push -f aliyun release-v$SRS_MAJOR
 echo "Create new tag $SRS_MAJOR for aliyun"
 
 if [[ $SRS_MAJOR == 2 ]]; then
-  git tag -d release-vlatest && git push aliyun :release-vlatest
+  git tag -d release-vlatest
   echo "Cleanup tag latest for aliyun"
 
-  git tag release-vlatest && git push aliyun release-vlatest
+  git tag release-vlatest && git push -f aliyun release-vlatest
   echo "Create new tag latest for aliyun"
 fi
 
