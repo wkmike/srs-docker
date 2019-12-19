@@ -52,15 +52,26 @@ if [[ ! -d $SRS_GIT ]]; then
   help=yes
 fi
 
+SRS_BRANCH=`(cd $SRS_GIT && git branch|grep \*|awk '{print $2}')`
+if [[ $? -ne 0 ]]; then
+  echo "Invalid branch in $SRS_GIT"
+  exit -1
+fi
+
+if [[ "v${SRS_BRANCH}" -ne "${SRS_FILTER}.0release" ]]; then
+  echo "Invalid branch $SRS_BRANCH in $SRS_GIT for release $SRS_FILTER"
+  exit -1
+fi
+
 if [[ -z $SRS_TAG ]]; then
-  SRS_TAG=`(cd ../srs && git describe --tags --abbrev=0 --match ${SRS_FILTER}.0-* 2>&1)`
+  SRS_TAG=`(cd $SRS_GIT && git describe --tags --abbrev=0 --match ${SRS_FILTER}.0-* 2>/dev/null)`
   if [[ $? -ne 0 ]]; then
     echo "Invalid tag $SRS_TAG of $SRS_FILTER in $SRS_GIT"
     exit -1
   fi
 fi
 
-SRS_MAJOR=`echo "v2.0-r6"|sed 's/^v//g'|awk -F '.' '{print $1}' 2>&1`
+SRS_MAJOR=`echo $SRS_TAG|sed 's/^v//g'|awk -F '.' '{print $1}' 2>&1`
 if [[ $? -ne 0 ]]; then
   echo "Invalid major version $SRS_MAJOR"
   exit -1
