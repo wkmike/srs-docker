@@ -74,8 +74,19 @@ if [[ ! -d $SRS_GIT ]]; then
   help=yes
 fi
 
+SRS_BRANCH=`(cd $SRS_GIT && git branch|grep \*|awk '{print $2}')`
+if [[ $? -ne 0 ]]; then
+  echo "Invalid branch in $SRS_GIT"
+  exit -1
+fi
+
+if [[ "v${SRS_BRANCH}" != "${SRS_FILTER}.0release" ]]; then
+  echo "Invalid branch $SRS_BRANCH in $SRS_GIT for release $SRS_FILTER"
+  exit -1
+fi
+
 if [[ -z $SRS_TAG ]]; then
-  SRS_TAG=`(cd ../srs && git describe --tags --abbrev=0 --match ${SRS_FILTER}.0-* 2>&1)`
+  SRS_TAG=`(cd $SRS_GIT && git describe --tags --abbrev=0 --match ${SRS_FILTER}.0-* 2>/dev/null)`
   if [[ $? -ne 0 ]]; then
     echo "Invalid tag $SRS_TAG of $SRS_FILTER in $SRS_GIT"
     exit -1
@@ -133,10 +144,10 @@ fi
 git commit -am "Release $SRS_TAG to docker hub"; git push
 echo "Commit changes of tag $SRS_TAG for docker"
 
-git tag -d $SRS_TAG 2>/dev/null; git push origin :$SRS_TAG 2>/dev/null
+git tag -d $SRS_TAG 2>/dev/null
 echo "Cleanup tag $SRS_TAG for docker"
 
-git tag $SRS_TAG; git push origin $SRS_TAG
+git tag $SRS_TAG; git push origin -f $SRS_TAG
 echo "Create new tag $SRS_TAG for docker"
 
 # For aliyun hub.
@@ -152,26 +163,26 @@ fi
 git commit -am "Release $SRS_TAG to docker hub"; git push
 echo "Commit changes of tag $SRS_TAG for aliyun"
 
-git tag -d release-v$SRS_TAG 2>/dev/null; git push aliyun :release-v$SRS_TAG 2>/dev/null
+git tag -d release-v$SRS_TAG 2>/dev/null
 echo "Cleanup tag $SRS_TAG for aliyun"
 
-git tag release-v$SRS_TAG; git push aliyun release-v$SRS_TAG
+git tag release-v$SRS_TAG; git push -f aliyun release-v$SRS_TAG
 echo "Create new tag $SRS_TAG for aliyun"
 
 NICE "aliyun hub release-v$SRS_MAJOR"
 
-git tag -d release-v$SRS_MAJOR 2>/dev/null; git push aliyun :release-v$SRS_MAJOR 2>/dev/null
+git tag -d release-v$SRS_MAJOR 2>/dev/null
 echo "Cleanup tag $SRS_MAJOR for aliyun"
 
-git tag release-v$SRS_MAJOR; git push aliyun release-v$SRS_MAJOR
+git tag release-v$SRS_MAJOR; git push -f aliyun release-v$SRS_MAJOR
 echo "Create new tag $SRS_MAJOR for aliyun"
 
 if [[ $SRS_MAJOR == 2 ]]; then
   NICE "aliyun hub release-vlatest"
-  git tag -d release-vlatest 2>/dev/null; git push aliyun :release-vlatest 2>/dev/null
+  git tag -d release-vlatest 2>/dev/null
   echo "Cleanup tag latest for aliyun"
 
-  git tag release-vlatest; git push aliyun release-vlatest
+  git tag release-vlatest; git push -f aliyun release-vlatest
   echo "Create new tag latest for aliyun"
 fi
 
