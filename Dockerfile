@@ -1,6 +1,6 @@
 # https://docs.docker.com/engine/reference/builder/#arg
 ARG tag=v2.0-r7
-ARG url=https://github.com/ossrs/srs.git
+ARG url=https://gitee.com/winlinvip/srs.oschina.git
 
 ############################################################
 # build
