@@ -28,7 +28,7 @@ FROM centos:7 AS dist
 # RTMP/1935, API/1985, HTTP/8080
 EXPOSE 1935 1985 8080
 # FFMPEG 4.1
-COPY /usr/local/bin/ffmpeg /usr/local/srs/objs/ffmpeg/bin/ffmpeg
+COPY --from=build /usr/local/bin/ffmpeg /usr/local/srs/objs/ffmpeg/bin/ffmpeg
 # SRS binary, config files and srs-console.
 COPY --from=build /usr/local/srs /usr/local/srs
 # Default workdir and command.
