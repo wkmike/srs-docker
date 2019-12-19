@@ -39,6 +39,21 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 
 > Note: How to write the correct config file, please read wiki([CN](https://github.com/ossrs/srs/wiki/v2_CN_Home)/[EN](https://github.com/ossrs/srs/wiki/v2_EN_Home)).
 
+## FFMPEG
+
+We copy the FFMEPG from [ossrs/srs:dev](https://github.com/ossrs/srs-docker/tree/dev),
+and put to `/usr/local/srs/objs/ffmpeg/bin/ffmpeg` which is the default value of configs.
+
+You can replace it by docker `-v`, for example:
+
+```
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
+    -v /path/of/ffmpeg:/usr/local/srs/objs/ffmpeg/bin/ffmpeg \
+    ossrs/srs:2
+```
+
+> Remark: You can replace config, log and tools by specifying `-v` for each one.
+
 ## Debug
 
 For debuggging:
