@@ -126,9 +126,9 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
 For windows **PowerShell**, we start a demo stream, ingested by FFMPEG:
 
 ```
-docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 \
-    -v $pwd/doc/source.200kbps.768x320.flv:/usr/local/srs/doc/source.200kbps.768x320.flv \
-    -v $pwd/conf/windows.conf:/usr/local/srs/conf/srs.conf \
+docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 `
+    -v $pwd/doc/source.200kbps.768x320.flv:/usr/local/srs/doc/source.200kbps.768x320.flv `
+    -v $pwd/conf/windows.conf:/usr/local/srs/conf/srs.conf `
     ossrs/srs:3
 ```
 
