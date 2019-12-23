@@ -134,7 +134,9 @@ docker run -p 1935:1935 -p 1985:1985 -p 8080:8080 `
 
 Then, we can play the demo stream by:
 
-* RTMP: []
+* RTMP: [rtmp://127.0.0.1/live/livestream](http://ossrs.net/srs.release/trunk/research/players/srs_player.html?app=live&stream=livestream&server=127.0.0.1&port=1935&autostart=true&vhost=127.0.0.1)
+* FLV: [http://127.0.0.1:8080/live/livestream.flv](http://ossrs.net/srs.release/trunk/research/players/srs_player.html?app=live&stream=livestream.flv&server=127.0.0.1&port=8080&autostart=true&vhost=127.0.0.1&schema=http)
+* HLS: [http://127.0.0.1:8080/live/livestream.m3u8](http://ossrs.net/srs.release/trunk/research/players/srs_player.html?app=live&stream=livestream.m3u8&server=127.0.0.1&port=8080&autostart=true&vhost=127.0.0.1&schema=http)
 
 ## Debug
 
@@ -142,6 +144,7 @@ For debuggging:
 
 * Check files of docker: ```docker run -it ossrs/srs bash```
 * Use specified versions: ```docker run -it ossrs/srs:v3.0-a2 bash```
+* To use other config file: ```docker run -v /path:/usr/local/srs/conf ossrs/srs:3 ./objs/srs -c other.conf```
 * Use gdb to debug SRS, please use [dev](https://github.com/ossrs/srs-docker/tree/dev#usage).
 
 Winlin 2019.11
