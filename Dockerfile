@@ -2,10 +2,10 @@
 #------------------------------------------------------------------------------------
 #--------------------------build-----------------------------------------------------
 #------------------------------------------------------------------------------------
-FROM centos:7 as build
+FROM ubuntu:xenial as build
 
-RUN yum install -y gcc gcc-c++ make patch sudo unzip perl zlib automake libtool \
-    zlib-devel bzip2 bzip2-devel libxml2-devel
+RUN apt-get install -y aptitude gcc g++ make patch unzip python autoconf automake libtool pkg-config \
+    libxml2-dev zlib1g-dev libzip-dev libbz2-dev
 
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
@@ -39,7 +39,7 @@ RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make ins
 #------------------------------------------------------------------------------------
 #--------------------------dist------------------------------------------------------
 #------------------------------------------------------------------------------------
-FROM centos:7 as dist
+FROM ubuntu:xenial as dist
 
 WORKDIR /tmp/srs
 
@@ -49,7 +49,7 @@ COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 
 # Note that git is very important for codecov to discover the .codecov.yml
-RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git
+RUN apt-get install -y aptitude gcc g++ make patch unzip python autoconf automake libtool pkg-config
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
