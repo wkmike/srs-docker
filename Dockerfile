@@ -4,8 +4,9 @@
 #------------------------------------------------------------------------------------
 FROM ubuntu:xenial as build
 
-RUN apt-get install -y aptitude gcc g++ make patch unzip python autoconf automake libtool pkg-config \
-    libxml2-dev zlib1g-dev libzip-dev libbz2-dev
+RUN apt-get update && \
+    apt-get install -y aptitude gcc g++ make patch unzip python autoconf automake libtool pkg-config \
+        libxml2-dev zlib1g-dev libzip-dev libbz2-dev
 
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
@@ -44,12 +45,13 @@ FROM ubuntu:xenial as dist
 WORKDIR /tmp/srs
 
 COPY --from=build /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
-COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
-COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
+COPY --from=build /usr/local/lib/libssl.a /usr/local/lib64/libssl.a
+COPY --from=build /usr/local/lib/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 
 # Note that git is very important for codecov to discover the .codecov.yml
-RUN apt-get install -y aptitude gcc g++ make patch unzip python autoconf automake libtool pkg-config
+RUN apt-get update && \
+    apt-get install -y aptitude gcc g++ make patch unzip python autoconf automake libtool pkg-config
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
