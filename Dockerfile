@@ -53,7 +53,7 @@ COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 # Note that git is very important for codecov to discover the .codecov.yml
 RUN apt-get update && \
     apt-get install -y aptitude gcc g++ make patch unzip python \
-        autoconf automake libtool pkg-config curl
+        autoconf automake libtool pkg-config curl net-tools
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
