@@ -65,6 +65,9 @@ RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unz
 ADD CherryPy-3.2.4.tar.gz2 /tmp
 RUN cd /tmp/CherryPy-3.2.4 && python setup.py install
 
+# For FFMPEG to search libsrt.so.1
+ENV LD_LIBRARY_PATH /usr/local/lib64
+
 ENV PATH $PATH:/usr/local/go/bin
 RUN cd /usr/local && \
     curl -L -O https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz && \
