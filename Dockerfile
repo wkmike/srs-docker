@@ -25,6 +25,7 @@ RUN cd /tmp/nasm-2.14 && ./configure && make && make install && \
     cd /tmp/srt-1.4.1 && ./configure && make && make install && \
     cd /tmp/x264-snapshot-20181116-2245 && ./configure --disable-cli --enable-static && make && make install
 
+# Remark, FFMPEG should always use libsrt.so, never use libsrt.a, or it'll failed.
 RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig && \
     cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
         --enable-gpl --enable-nonfree \
@@ -33,10 +34,8 @@ RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig &
         --enable-libxml2 --enable-demuxer=dash \
         --enable-libsrt && \
     (cd /usr/local/lib && mkdir -p tmp && mv *.so* *.la tmp && echo "Force use static libraries in lib") && \
-    (cd /usr/local/lib64 && mkdir -p tmp && mv *.so* tmp && echo "Force use static libraries in lib64") && \
 	make && make install && echo "FFMPEG build and install successfully" && \
-    (cd /usr/local/lib && mv tmp/* . && rmdir tmp) && \
-    (cd /usr/local/lib64 && mv tmp/* . && rmdir tmp)
+    (cd /usr/local/lib && mv tmp/* . && rmdir tmp)
 
 # Openssl for SRS
 ADD openssl-1.1.0e.tar.bz2 /tmp
@@ -54,7 +53,9 @@ COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
 COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 COPY --from=build /usr/local/lib64/libsrt.a /usr/local/lib64/libsrt.a
+COPY --from=build /usr/local/lib64/libsrt.so.1.4.1 /usr/local/lib64/libsrt.so.1.4.1
 COPY --from=build /usr/local/include/srt /usr/local/include/srt
+RUN cd /usr/local/lib64 && ln -sf libsrt.so.1.4.1 libsrt.so.1 && ln -sf libsrt.so.1 libsrt.so
 
 # Note that git is very important for codecov to discover the .codecov.yml
 RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git \
