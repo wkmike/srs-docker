@@ -39,7 +39,7 @@ RUN cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread
         --enable-postproc --enable-bzlib --enable-zlib \
         --enable-libx264 --enable-libmp3lame --enable-libfdk-aac --enable-libspeex \
         --enable-libxml2 --enable-demuxer=dash \
-        --enable-libsrt --extra-ldflags='-ldl -lstdc++ -lcrypto' && \
+        --enable-libsrt --pkg-config-flags='--static' && \
     (cd /usr/local/lib && mkdir -p tmp && mv *.so* *.la tmp && echo "Force use static libraries in lib") && \
     (cd /usr/local/lib64 && mkdir -p tmp && mv *.so* tmp && echo "Force use static libraries in lib64") && \
 	make && make install && echo "FFMPEG build and install successfully" && \
