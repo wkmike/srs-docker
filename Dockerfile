@@ -63,15 +63,11 @@ COPY --from=build /usr/local/include/srt /usr/local/include/srt
 RUN cd /usr/local/lib64 && ln -sf libsrt.so.1.4.1 libsrt.so.1 && ln -sf libsrt.so.1 libsrt.so
 
 # Note that git is very important for codecov to discover the .codecov.yml
-RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git \
-    tcl cmake
+RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
 RUN cd /tmp/CherryPy-3.2.4 && python setup.py install
-
-# For FFMPEG to search libsrt.so.1
-ENV LD_LIBRARY_PATH /usr/local/lib64
 
 ENV PATH $PATH:/usr/local/go/bin
 RUN cd /usr/local && \
