@@ -8,6 +8,9 @@ RUN yum install -y gcc gcc-c++ make patch sudo unzip perl zlib automake libtool 
     zlib-devel bzip2 bzip2-devel libxml2-devel \
     tcl cmake
 
+# Libs path.
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+
 # Openssl for SRS
 ADD openssl-1.1.0e.tar.bz2 /tmp
 RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
@@ -27,12 +30,11 @@ RUN cd /tmp/nasm-2.14 && ./configure && make && make install && \
     cd /tmp/fdk-aac-0.1.3 && bash autogen.sh && ./configure && make && make install && \
     cd /tmp/lame-3.99.5 && ./configure && make && make install && \
     cd /tmp/speex-1.2rc1 && ./configure && make && make install && \
-    export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig && cd /tmp/srt-1.4.1 && ./configure && make && make install && \
+    cd /tmp/srt-1.4.1 && ./configure && make && make install && \
     cd /tmp/x264-snapshot-20181116-2245 && ./configure --disable-cli --enable-static && make && make install
 
 # Remark, FFMPEG should always use libsrt.so, never use libsrt.a, or it'll failed.
-RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig && \
-    cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
+RUN cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
         --enable-gpl --enable-nonfree \
         --enable-postproc --enable-bzlib --enable-zlib \
         --enable-libx264 --enable-libmp3lame --enable-libfdk-aac --enable-libspeex \
