@@ -9,6 +9,13 @@ RUN apt-get update && \
         autoconf automake libtool pkg-config libxml2-dev zlib1g-dev \
         libzip-dev libbz2-dev
 
+# Libs path for ffmpeg(depends on serval libs).
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+
+# Openssl for SRS
+ADD openssl-1.1.0e.tar.bz2 /tmp
+RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
+
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
 ADD yasm-1.2.0.tar.bz2 /tmp
@@ -24,19 +31,15 @@ RUN cd /tmp/nasm-2.14 && ./configure && make && make install && \
     cd /tmp/speex-1.2rc1 && ./configure && make && make install && \
     cd /tmp/x264-snapshot-20181116-2245 && ./configure --disable-cli --enable-static && make && make install
 
-RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && \
-    cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
+RUN cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
         --enable-gpl --enable-nonfree \
         --enable-postproc --enable-bzlib --enable-zlib \
         --enable-libx264 --enable-libmp3lame --enable-libfdk-aac --enable-libspeex \
-        --enable-libxml2 --enable-demuxer=dash && \
+        --enable-libxml2 --enable-demuxer=dash \
+        --pkg-config-flags='--static' && \
     (cd /usr/local/lib && mkdir -p tmp && mv *.so* *.la tmp && echo "Force use static libraries") && \
 	make && make install && echo "FFMPEG build and install successfully" && \
     (cd /usr/local/lib && mv tmp/* . && rmdir tmp)
-
-# Openssl for SRS
-ADD openssl-1.1.0e.tar.bz2 /tmp
-RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
 
 #------------------------------------------------------------------------------------
 #--------------------------dist------------------------------------------------------
