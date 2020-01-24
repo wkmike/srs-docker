@@ -27,7 +27,7 @@ RUN cd /tmp/nasm-2.14 && ./configure && make && make install && \
     cd /tmp/fdk-aac-0.1.3 && bash autogen.sh && ./configure && make && make install && \
     cd /tmp/lame-3.99.5 && ./configure && make && make install && \
     cd /tmp/speex-1.2rc1 && ./configure && make && make install && \
-    cd /tmp/srt-1.4.1 && ./configure && make && make install && \
+    export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig && cd /tmp/srt-1.4.1 && ./configure && make && make install && \
     cd /tmp/x264-snapshot-20181116-2245 && ./configure --disable-cli --enable-static && make && make install
 
 # Remark, FFMPEG should always use libsrt.so, never use libsrt.a, or it'll failed.
