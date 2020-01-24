@@ -6,8 +6,8 @@ FROM ubuntu:xenial as build
 
 RUN apt-get update && \
     apt-get install -y aptitude gcc g++ make patch unzip python \
-        autoconf automake libtool pkg-config libxml2 libxml2-dev zlib1g-dev \
-        libzip-dev libbz2-dev
+        autoconf automake libtool pkg-config libxml2-dev zlib1g-dev \
+        liblzma-dev libzip-dev libbz2-dev
 
 # Libs path for ffmpeg(depends on serval libs).
 ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
@@ -56,7 +56,7 @@ COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 # Note that git is very important for codecov to discover the .codecov.yml
 RUN apt-get update && \
     apt-get install -y aptitude gcc g++ make patch unzip python \
-        autoconf automake libtool pkg-config libxml2 libxml2-dev curl net-tools
+        autoconf automake libtool pkg-config libxml2-dev liblzma-dev curl net-tools
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
