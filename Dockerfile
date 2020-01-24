@@ -7,6 +7,13 @@ FROM centos:7 as build
 RUN yum install -y gcc gcc-c++ make patch sudo unzip perl zlib automake libtool \
     zlib-devel bzip2 bzip2-devel libxml2-devel
 
+# Libs path for srt(depends on ssl) and ffmpeg(depends on serval libs).
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+
+# Openssl for SRS
+ADD openssl-1.1.0e.tar.bz2 /tmp
+RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
+
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
 ADD yasm-1.2.0.tar.bz2 /tmp
@@ -27,14 +34,11 @@ RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && \
         --enable-gpl --enable-nonfree \
         --enable-postproc --enable-bzlib --enable-zlib \
         --enable-libx264 --enable-libmp3lame --enable-libfdk-aac --enable-libspeex \
-        --enable-libxml2 --enable-demuxer=dash && \
+        --enable-libxml2 --enable-demuxer=dash \
+        --pkg-config-flags='--static' && \
     (cd /usr/local/lib && mkdir -p tmp && mv *.so* *.la tmp && echo "Force use static libraries") && \
 	make && make install && echo "FFMPEG build and install successfully" && \
     (cd /usr/local/lib && mv tmp/* . && rmdir tmp)
-
-# Openssl for SRS
-ADD openssl-1.1.0e.tar.bz2 /tmp
-RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
 
 #------------------------------------------------------------------------------------
 #--------------------------dist------------------------------------------------------
