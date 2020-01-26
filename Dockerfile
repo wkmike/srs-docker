@@ -68,3 +68,6 @@ RUN cd /usr/local && \
     curl -L -O https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz && \
     tar xf go1.13.5.linux-amd64.tar.gz && \
     rm -f go1.13.5.linux-amd64.tar.gz
+
+ENV LIBRARY_PATH=/usr/local/lib64
+ENV LD_LIBRARY_PATH=/usr/local/lib64
