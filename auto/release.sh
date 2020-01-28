@@ -137,8 +137,10 @@ NICE "docker hub $SRS_TAG"
 SRS_GITHUB=https://github.com/ossrs/srs.git
 if [[ $MACOS == YES ]]; then
   sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
+  sed -i '' "s|^ARG repo=.*$|ARG repo=ossrs/srs:dev|g" Dockerfile
 else
   sed -i "s|^ARG url=.*$|ARG url=${SRS_GITHUB}|g" Dockerfile
+  sed -i "s|^ARG repo=.*$|ARG repo=ossrs/srs:dev|g" Dockerfile
 fi
 
 git commit -am "Release $SRS_TAG to docker hub"; git push
@@ -156,8 +158,10 @@ NICE "aliyun hub release-v$SRS_TAG"
 SRS_GITEE=https://gitee.com/winlinvip/srs.oschina.git
 if [[ $MACOS == YES ]]; then
   sed -i '' "s|^ARG url=.*$|ARG url=${SRS_GITEE}|g" Dockerfile
+  sed -i '' "s|^ARG repo=.*$|ARG repo=registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev|g" Dockerfile
 else
   sed -i "s|^ARG url=.*$|ARG url=${SRS_GITEE}|g" Dockerfile
+  sed -i "s|^ARG repo=.*$|ARG repo=registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev|g" Dockerfile
 fi
 
 git commit -am "Release $SRS_TAG to docker hub"; git push
