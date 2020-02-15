@@ -181,7 +181,7 @@ echo "Cleanup tag $SRS_MAJOR for aliyun"
 git tag release-v$SRS_MAJOR; git push -f aliyun release-v$SRS_MAJOR
 echo "Create new tag $SRS_MAJOR for aliyun"
 
-if [[ $SRS_MAJOR == 2 ]]; then
+if [[ $SRS_MAJOR == 3 ]]; then
   NICE "aliyun hub release-vlatest"
   git tag -d release-vlatest 2>/dev/null
   echo "Cleanup tag latest for aliyun"
