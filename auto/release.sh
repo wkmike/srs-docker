@@ -108,7 +108,7 @@ if [[ $help == yes ]]; then
 
   -v2, --v2     Package the latest tag of 2.0release branch, such as v2.0-r7.
   -v3, --v3     Package the latest tag of 3.0release branch, such as v3.0-a2.
-  -v4, --v4     Package the latest tag of develop branch, such as v4.0.23.
+  -v4, --v4     Package the latest tag of 4.0release branch, such as v4.0.23.
   --git         The SRS git source directory to fetch the latest tag. Default: $HOME/git/srs
   --tag         The tag to build the docker. Retrieve from branch.
 END
