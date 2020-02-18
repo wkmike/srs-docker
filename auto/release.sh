@@ -49,6 +49,8 @@ do
         --v2)                           SRS_FILTER=v2             ;;
         -v3)                            SRS_FILTER=v3             ;;
         --v3)                           SRS_FILTER=v3             ;;
+        -v4)                            SRS_FILTER=v4             ;;
+        --v4)                           SRS_FILTER=v4             ;;
         --git)                          SRS_GIT=$value            ;;
         --tag)                          SRS_TAG=$value            ;;
 
@@ -64,7 +66,7 @@ if [[ -z $SRS_FILTER ]]; then
   help=yes
 fi
 
-if [[ $SRS_FILTER != v2 && $SRS_FILTER != v3 ]]; then
+if [[ $SRS_FILTER != v2 && $SRS_FILTER != v3 && $SRS_FILTER != v4 ]]; then
   echo "Invalid filter $SRS_FILTER"
   help=yes
 fi
@@ -86,7 +88,7 @@ if [[ "v${SRS_BRANCH}" != "${SRS_FILTER}.0release" ]]; then
 fi
 
 if [[ -z $SRS_TAG ]]; then
-  SRS_TAG=`(cd $SRS_GIT && git describe --tags --abbrev=0 --match ${SRS_FILTER}.0-* 2>/dev/null)`
+  SRS_TAG=`(cd $SRS_GIT && git describe --tags --abbrev=0 --match ${SRS_FILTER}.0* 2>/dev/null)`
   if [[ $? -ne 0 ]]; then
     echo "Invalid tag $SRS_TAG of $SRS_FILTER in $SRS_GIT"
     exit -1
@@ -106,6 +108,7 @@ if [[ $help == yes ]]; then
 
   -v2, --v2     Package the latest tag of 2.0release branch, such as v2.0-r7.
   -v3, --v3     Package the latest tag of 3.0release branch, such as v3.0-a2.
+  -v4, --v4     Package the latest tag of develop branch, such as v4.0.23.
   --git         The SRS git source directory to fetch the latest tag. Default: $HOME/git/srs
   --tag         The tag to build the docker. Retrieve from branch.
 END
