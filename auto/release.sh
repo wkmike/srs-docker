@@ -114,7 +114,7 @@ fi
 
 # If v3.0-b0, it's not temporary release.
 # If v3.0.125, it's temporary release. We won't update srs:3 and srs:latest.
-TEMPORARY_RELEASE=TRUE;
+TEMPORARY_RELEASE=YES;
 echo ${SRS_FILTER}| grep -q '-' && TEMPORARY_RELEASE=NO;
 
 NICE "Build docker for fitler=$SRS_FILTER of $SRS_GIT, tag is $SRS_TAG, major=$SRS_MAJOR, temp=$TEMPORARY_RELEASE"
