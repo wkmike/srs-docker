@@ -112,7 +112,12 @@ END
     exit 0
 fi
 
-NICE "Build docker for fitler=$SRS_FILTER of $SRS_GIT, tag is $SRS_TAG, major=$SRS_MAJOR"
+# If v3.0-b0, it's not temporary release.
+# If v3.0.125, it's temporary release. We won't update srs:3 and srs:latest.
+TEMPORARY_RELEASE=TRUE;
+echo ${SRS_FILTER}| grep -q '-' && TEMPORARY_RELEASE=NO;
+
+NICE "Build docker for fitler=$SRS_FILTER of $SRS_GIT, tag is $SRS_TAG, major=$SRS_MAJOR, temp=$TEMPORARY_RELEASE"
 
 OS=`python -mplatform 2>&1`
 MACOS=NO && CENTOS=NO && UBUNTU=NO && CENTOS7=NO
@@ -172,6 +177,11 @@ echo "Cleanup tag $SRS_TAG for aliyun"
 
 git tag release-v$SRS_TAG; git push -f aliyun release-v$SRS_TAG
 echo "Create new tag $SRS_TAG for aliyun"
+
+# For temporary release, we don't update srs:3 or srs:latest
+if [[ $TEMPORARY_RELEASE == YES ]]; then
+  exit 0;
+fi
 
 NICE "aliyun hub release-v$SRS_MAJOR"
 
