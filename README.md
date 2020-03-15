@@ -22,6 +22,7 @@ git clone https://github.com/ossrs/srs.git && cd srs
 ```
 git checkout feature/srt &&
 HostIP=`bash auto/get_host_ip.sh` &&
+echo "http://$HostIP:8080/players/rtc_player.html" &&
 docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
   -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp --env CANDIDATE=$HostIP \
   registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
@@ -36,7 +37,9 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
 ./objs/srs -c conf/rtc.conf
 ```
 
-Open in chrome: http://localhost:8080/players/rtc_player.html
+Open in chrome: http://192.168.1.4:8080/players/rtc_player.html
+
+> Remark: Replace by your docker host server IP.
 
 ## EXEC
 
