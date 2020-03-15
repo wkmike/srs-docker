@@ -3,19 +3,13 @@
 ![](http://ossrs.net:8000/gif/v1/sls.gif?site=github.com&path=/docker/dev)
 [![](https://cloud.githubusercontent.com/assets/2777660/22814959/c51cbe72-ef92-11e6-81cc-32b657b285d5.png)](https://github.com/ossrs/srs/wiki/v1_CN_Contact#wechat)
 
-CentOS docker for [SRS](https://github.com/ossrs/srs) developer.
+CentOS docker for [SRS](https://github.com/ossrs/srs) RTC developer.
 
 ## Usage
 
 **Install docker**
 
 Download docker from [here](https://www.docker.com/products/docker-desktop) then start docker.
-
-**Pull docker image**
-
-```
-docker pull ossrs/srs:dev
-```
 
 **Clone SRS**
 
@@ -26,23 +20,23 @@ git clone https://github.com/ossrs/srs.git && cd srs
 **Start docker**
 
 ```
+git checkout feature/srt &&
+HostIP=`bash auto/get_host_ip.sh` &&
 docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
-  -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/srs:dev bash
+  -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp --env CANDIDATE=$HostIP \
+  registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
 ```
 
-> Note: Recommend to use [AliyunCR](https://cr.console.aliyun.com/) `registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev`, because it's much faster.
+> Note: You can also use `ossrs/srs:dev` from docker hub.
 
-**Build SRS in docker**
-
-```
-./configure && make
-```
-
-**Run SRS in docker**
+**Build and start SRS in docker**
 
 ```
-./objs/srs -c conf/console.conf
+./configure && make &&
+./objs/srs -c conf/rtc.conf
 ```
+
+Open in chrome: http://localhost:8080/players/rtc_player.html
 
 ## EXEC
 
