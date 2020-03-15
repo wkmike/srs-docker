@@ -7,8 +7,6 @@ CentOS docker for [SRS](https://github.com/ossrs/srs) RTC developer.
 
 ## Usage
 
-**Install docker**
-
 Download docker from [here](https://www.docker.com/products/docker-desktop) then start docker.
 
 **Clone SRS**
