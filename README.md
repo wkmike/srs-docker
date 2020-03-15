@@ -39,7 +39,7 @@ docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
 
 Open in chrome: http://192.168.1.4:8080/players/rtc_player.html
 
-> Remark: Replace by your docker host server IP.
+> Remark: Replace `192.168.1.4` by your docker host server IP.
 
 ## EXEC
 
