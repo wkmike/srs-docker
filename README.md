@@ -12,14 +12,15 @@ Download docker from [here](https://www.docker.com/products/docker-desktop) then
 **Clone SRS**
 
 ```
-git clone https://github.com/ossrs/srs.git && cd srs && git checkout feature/srt
+cd ~/git && git clone --depth=1 https://github.com/ossrs/srs-docker.git &&
+cd ~/git && git clone https://github.com/ossrs/srs.git && cd srs && git checkout feature/srt
 ```
 
 **Start docker**
 
 ```
-HostIP=`bash auto/get_host_ip.sh` && echo "http://$HostIP:8080/players/rtc_player.html" &&
-docker run -it -d -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp \
+HostIP=`bash ~/git/srs-docker/auto/get_host_ip.sh` && echo "http://$HostIP:8080/players/rtc_player.html" &&
+docker run -it -d -v ~/git/srs:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp \
      --name=rtc --env CANDIDATE=$HostIP registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
 ```
 
