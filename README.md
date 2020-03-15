@@ -40,7 +40,7 @@ docker exec rtc ffmpeg -re -i doc/source.200kbps.768x320.flv -vcodec libx264 -pr
 
 **Play by WebRTC palyer**
 
-Open in chrome: http://192.168.1.4:8080/players/rtc_player.html
+Open stream bellow in player: http://192.168.1.4:8080/players/rtc_player.html
 
 ```
 webrtc://192.168.1.4/live/livestream
