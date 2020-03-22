@@ -22,8 +22,7 @@ git checkout feature/rtc
 将本地目录`~/git/srs`映射到docker，可以在本地编辑。如果你的SRS在其他目录，也可以换成其他路径：
 
 ```
-cd ~/git/srs &&
-HostIP="192.168.1.3" && echo "http://$HostIP:8080/players/rtc_player.html" &&
+cd ~/git/srs && HostIP="192.168.1.3" &&
 docker run -it -d -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp \
      --name=rtc --privileged --env CANDIDATE=$HostIP registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
 ```
