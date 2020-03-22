@@ -9,7 +9,7 @@ CentOS docker for [SRS](https://github.com/ossrs/srs) RTC developer.
 
 从[这里](https://www.docker.com/products/docker-desktop)下载Docker，并启动。
 
-**Clone SRS**
+**>>> Clone SRS**
 
 ```
 git clone https://gitee.com/winlinvip/srs.oschina.git srs &&
@@ -17,7 +17,7 @@ cd srs/trunk && git remote set-url origin https://github.com/ossrs/srs.git && gi
 git checkout feature/rtc
 ```
 
-**Start docker**
+**>>> Start docker**
 
 将本地目录`~/git/srs`映射到docker，可以在本地编辑。如果你的SRS在其他目录，也可以换成其他路径：
 
@@ -32,7 +32,7 @@ docker run -it -d -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 
 
 > Remark: 如果IP变更后，可以在Docker中更新IP就可以：`export CANDIDATE=192.168.1.3`
 
-**Build and start SRS in docker**
+**>>> Build and start SRS in docker**
 
 在Docker中编译SRS和启动：
 
@@ -48,7 +48,7 @@ docker exec rtc make -j4 server && ./objs/srs -c conf/rtc.conf
 
 > Note: 此时文件都在你的本地，比如配置文件，也可以使用其他的配置文件。
 
-**Publish stream to SRS**
+**>>> Publish stream to SRS**
 
 推流到本地，或者使用OBS推流：
 
@@ -57,7 +57,7 @@ docker exec rtc ffmpeg -re -i doc/source.200kbps.768x320.flv -vcodec libx264 -pr
     -f flv -y rtmp://localhost/live/livestream
 ```
 
-**Play by WebRTC palyer**
+**>>> Play by WebRTC palyer**
 
 使用H5播放：https://ossrs.net/players/rtc_player.html
 
