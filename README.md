@@ -7,32 +7,50 @@ CentOS docker for [SRS](https://github.com/ossrs/srs) RTC developer.
 
 ## Usage
 
-Download docker from [here](https://www.docker.com/products/docker-desktop) then start docker.
+从[这里](https://www.docker.com/products/docker-desktop)下载Docker，并启动。
 
 **Clone SRS**
 
 ```
-cd ~/git && git clone --depth=1 https://github.com/ossrs/srs-docker.git &&
-cd ~/git && git clone https://github.com/ossrs/srs.git && cd srs && git checkout feature/srt
+git clone https://gitee.com/winlinvip/srs.oschina.git srs &&
+cd srs/trunk && git remote set-url origin https://github.com/ossrs/srs.git && git pull &&
+git checkout feature/rtc
 ```
 
 **Start docker**
 
+将本地目录`~/git/srs`映射到docker，可以在本地编辑。如果你的SRS在其他目录，也可以换成其他路径：
+
 ```
-HostIP=`bash ~/git/srs-docker/auto/get_host_ip.sh` && echo "http://$HostIP:8080/players/rtc_player.html" &&
-docker run -it -d -v ~/git/srs:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp \
-     --name=rtc --env CANDIDATE=$HostIP registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
+cd ~/git/srs &&
+HostIP="192.168.1.3" && echo "http://$HostIP:8080/players/rtc_player.html" &&
+docker run -it -d -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 -p 8000:8000/udp \
+     --name=rtc --privileged --env CANDIDATE=$HostIP registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
 ```
 
-> Note: You can also use `ossrs/srs:dev` from docker hub.
+> Note: 如果是Mac，可以用命令获取IP地址: `ifconfig en0 inet| grep inet|awk '{print $2}'`
+
+> Remark: 如果IP变更后，可以在Docker中更新IP就可以：`export CANDIDATE=192.168.1.3`
 
 **Build and start SRS in docker**
 
+在Docker中编译SRS和启动：
+
 ```
-docker exec rtc ./configure && make && ./objs/srs -c conf/rtc.conf
+docker exec rtc ./configure && make -j4 server && ./objs/srs -c conf/rtc.conf
 ```
 
+如果不需要configure，可以直接编译和启动：
+
+```
+docker exec rtc make -j4 server && ./objs/srs -c conf/rtc.conf
+```
+
+> Note: 此时文件都在你的本地，比如配置文件，也可以使用其他的配置文件。
+
 **Publish stream to SRS**
+
+推流到本地，或者使用OBS推流：
 
 ```
 docker exec rtc ffmpeg -re -i doc/source.200kbps.768x320.flv -vcodec libx264 -profile:v baseline -acodec copy \
@@ -41,40 +59,10 @@ docker exec rtc ffmpeg -re -i doc/source.200kbps.768x320.flv -vcodec libx264 -pr
 
 **Play by WebRTC palyer**
 
-Open stream bellow in player: http://192.168.1.4:8080/players/rtc_player.html
+使用H5播放：https://ossrs.net/players/rtc_player.html
+
+输入下面的地址点开始播放：
 
 ```
-webrtc://192.168.1.4/live/livestream
+webrtc://192.168.1.3/live/livestream
 ```
-
-> Remark: Replace `192.168.1.4` by your docker host server IP.
-
-## EXEC
-
-To enter your container:
-
-```
-dockerID=`docker ps --format "{{.ID}} {{.Image}}" |grep 'ossrs/srs:dev' |awk '{print $1}'` &&
-docker exec -it $dockerID bash
-```
-
-## GDB
-
-To run docker with `--privileged` for GDB, or it fail for error `Cannot create process: Operation not permitted`.
-
-## Api Server
-
-To run api-server at 8085 in docker:
-
-```
-(cd objs/CherryPy-3.2.4 && python setup.py install --user) &&
-python research/api-server/server.py 8085
-```
-
-## Features
-
-- [x] v0.3, Go, dstat, lsb_release.
-- [x] v0.2, NetTools, GDB.
-- [x] v0.2, OpenSSL 1.1.0e
-- [x] v0.1, FFMPEG 4.1 with x264 core.157
-- [x] v0.1, GIT
