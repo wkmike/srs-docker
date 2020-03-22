@@ -78,6 +78,21 @@ if [[ ! -d $SRS_GIT ]]; then
   help=yes
 fi
 
+if [[ $help == yes ]]; then
+    cat << END
+
+  -h, --help    Print this message
+
+  -v2, --v2     Package the latest tag of 2.0release branch, such as v2.0-r7.
+  -v3, --v3     Package the latest tag of 3.0release branch, such as v3.0-a2.
+  -v4, --v4     Package the latest tag of 4.0release branch, such as v4.0.23.
+  --git         The SRS git source directory to fetch the latest tag. Default: $HOME/git/srs
+  --tag         The tag to build the docker. Retrieve from branch.
+  --any-branch  Don't check branch, allow any branch to create tag.
+END
+    exit 0
+fi
+
 if [[ $CHECK_BRANCH == YES ]]; then
   SRS_BRANCH=`(cd $SRS_GIT && git branch|grep \*|awk '{print $2}')`
   if [[ $? -ne 0 ]]; then
@@ -103,21 +118,6 @@ SRS_MAJOR=`echo $SRS_TAG|sed 's/^v//g'|awk -F '.' '{print $1}' 2>&1`
 if [[ $? -ne 0 ]]; then
   echo "Invalid major version $SRS_MAJOR"
   exit -1
-fi
-
-if [[ $help == yes ]]; then
-    cat << END
-
-  -h, --help    Print this message
-
-  -v2, --v2     Package the latest tag of 2.0release branch, such as v2.0-r7.
-  -v3, --v3     Package the latest tag of 3.0release branch, such as v3.0-a2.
-  -v4, --v4     Package the latest tag of 4.0release branch, such as v4.0.23.
-  --git         The SRS git source directory to fetch the latest tag. Default: $HOME/git/srs
-  --tag         The tag to build the docker. Retrieve from branch.
-  --any-branch  Don't check branch, allow any branch to create tag.
-END
-    exit 0
 fi
 
 # If v3.0-b0, it's not temporary release.
