@@ -57,7 +57,8 @@ COPY --from=build /usr/local/lib64/libcrypto.so.1.1 /usr/local/lib64/libcrypto.s
 COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
 
 # Note that git is very important for codecov to discover the .codecov.yml
-RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git nasm
+RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git \
+    nasm perf strace
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
