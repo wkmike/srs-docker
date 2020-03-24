@@ -7,30 +7,27 @@ CentOS docker for [SRS](https://github.com/ossrs/srs) developer.
 
 ## Usage
 
-**Install docker**
+**>>> Install docker**
 
 Download docker from [here](https://www.docker.com/products/docker-desktop) then start docker.
 
-**Pull docker image**
+**>>> Clone SRS**
 
 ```
-docker pull ossrs/srs:dev
+git clone https://gitee.com/winlinvip/srs.oschina.git srs &&
+cd srs && git remote set-url origin https://github.com/ossrs/srs.git && git pull
 ```
 
-**Clone SRS**
+> Note: Please read https://github.com/ossrs/srs#usage
 
-```
-git clone https://github.com/ossrs/srs.git && cd srs
-```
-
-**Start docker**
+**>>> Start docker**
 
 ```
 docker run -it -v `pwd`:/tmp/srs -w /tmp/srs/trunk -p 1935:1935 \
-  -p 1985:1985 -p 8080:8080 -p 8085:8085 ossrs/srs:dev bash
+  -p 1985:1985 -p 8080:8080 -p 8085:8085 registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev bash
 ```
 
-> Note: Recommend to use [AliyunCR](https://cr.console.aliyun.com/) `registry.cn-hangzhou.aliyuncs.com/ossrs/srs:dev`, because it's much faster.
+> Note: We use [AliyunCR](https://cr.console.aliyun.com/), you can directly use `ossrs/srs:dev` instead.
 
 **Build SRS in docker**
 
