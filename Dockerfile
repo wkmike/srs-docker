@@ -1,6 +1,6 @@
 # https://docs.docker.com/engine/reference/builder/#arg
 # @remark Please never modify it, the auto/release.sh will update it automatically.
-ARG tag=v4.0.14
+ARG tag=v4.0.17
 ARG url=https://github.com/ossrs/srs.git
 
 ############################################################
