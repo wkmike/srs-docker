@@ -73,3 +73,4 @@ RUN cd /usr/local && \
 
 ENV LIBRARY_PATH=/usr/local/lib64
 ENV LD_LIBRARY_PATH=/usr/local/lib64
+
