@@ -10,9 +10,13 @@ RUN yum install -y gcc gcc-c++ make patch sudo unzip perl zlib automake libtool 
 # Libs path for srt(depends on ssl) and ffmpeg(depends on serval libs).
 ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
 
-# Openssl for SRS.
-ADD openssl-1.1.0e.tar.bz2 /tmp
-RUN cd /tmp/openssl-1.1.0e && ./config -no-threads && make && make install_sw
+# Openssl 1.1.* for SRS.
+# ADD openssl-1.1.0e.tar.bz2 /tmp
+# RUN cd /tmp/openssl-1.1.0e && ./config -no-threads && make && make install_sw
+
+# Openssl 1.0.* for SRS.
+ADD openssl-OpenSSL_1_0_2u.tar.gz /tmp
+RUN cd /tmp/openssl-OpenSSL_1_0_2u && ./config -no-threads && make && make install_sw
 
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
