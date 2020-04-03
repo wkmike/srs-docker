@@ -16,7 +16,7 @@ ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
 
 # Openssl 1.0.* for SRS.
 ADD openssl-OpenSSL_1_0_2u.tar.gz /tmp
-RUN cd /tmp/openssl-OpenSSL_1_0_2u && ./config -no-threads && make && make install_sw
+RUN cd /tmp/openssl-OpenSSL_1_0_2u && ./config -shared -no-threads && make && make install_sw
 
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
@@ -51,14 +51,18 @@ FROM centos:7 as dist
 
 WORKDIR /tmp/srs
 
+# FFmpeg.
 COPY --from=build /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
-COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
-COPY --from=build /usr/local/lib64/libssl.so /usr/local/lib64/libssl.so
-COPY --from=build /usr/local/lib64/libssl.so.1.1 /usr/local/lib64/libssl.so.1.1
-COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
-COPY --from=build /usr/local/lib64/libcrypto.so /usr/local/lib64/libcrypto.so
-COPY --from=build /usr/local/lib64/libcrypto.so.1.1 /usr/local/lib64/libcrypto.so.1.1
-COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
+# Openssl 1.1.* for SRS.
+#COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
+#COPY --from=build /usr/local/lib64/libssl.so /usr/local/lib64/libssl.so
+#COPY --from=build /usr/local/lib64/libssl.so.1.1 /usr/local/lib64/libssl.so.1.1
+#COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
+#COPY --from=build /usr/local/lib64/libcrypto.so /usr/local/lib64/libcrypto.so
+#COPY --from=build /usr/local/lib64/libcrypto.so.1.1 /usr/local/lib64/libcrypto.so.1.1
+#COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
+# Openssl 1.0.* for SRS.
+COPY --from=build /usr/local/ssl /usr/local/ssl
 
 # Note that git is very important for codecov to discover the .codecov.yml
 RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git \
