@@ -9,11 +9,17 @@ RUN yum install -y gcc gcc-c++ make patch sudo unzip perl zlib automake libtool 
     tcl cmake
 
 # Libs path for srt(depends on ssl) and ffmpeg(depends on serval libs).
-ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/ssl/lib/pkgconfig
 
-# Openssl for SRS
-ADD openssl-1.1.0e.tar.bz2 /tmp
-RUN cd /tmp/openssl-1.1.0e && ./config -no-shared no-threads && make && make install_sw
+# Openssl 1.1.* for SRS.
+# ADD openssl-1.1.0e.tar.bz2 /tmp
+# RUN cd /tmp/openssl-1.1.0e && \
+#    ./config -shared -no-threads --prefix=/usr/local/ssl && make && make install_sw
+
+# Openssl 1.0.* for SRS.
+ADD openssl-OpenSSL_1_0_2u.tar.gz /tmp
+RUN cd /tmp/openssl-OpenSSL_1_0_2u && \
+    ./config -shared -no-threads --prefix=/usr/local/ssl && make && make install_sw
 
 # For FFMPEG
 ADD nasm-2.14.tar.bz2 /tmp
@@ -54,11 +60,7 @@ FROM centos:7 as dist
 WORKDIR /tmp/srs
 
 COPY --from=build /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
-COPY --from=build /usr/local/lib64/libssl.a /usr/local/lib64/libssl.a
-COPY --from=build /usr/local/lib64/libcrypto.a /usr/local/lib64/libcrypto.a
-COPY --from=build /usr/local/include/openssl /usr/local/include/openssl
-COPY --from=build /usr/local/lib64/libsrt.a /usr/local/lib64/libsrt.a
-COPY --from=build /usr/local/lib64/libsrt.so.1.4.1 /usr/local/lib64/libsrt.so.1.4.1
+COPY --from=build /usr/local/ssl /usr/local/ssl
 COPY --from=build /usr/local/include/srt /usr/local/include/srt
 RUN cd /usr/local/lib64 && ln -sf libsrt.so.1.4.1 libsrt.so.1 && ln -sf libsrt.so.1 libsrt.so
 
