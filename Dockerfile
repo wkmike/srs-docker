@@ -12,7 +12,8 @@ ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
 
 # Openssl 1.1.* for SRS.
 # ADD openssl-1.1.0e.tar.bz2 /tmp
-# RUN cd /tmp/openssl-1.1.0e && ./config -no-threads && make && make install_sw
+# RUN cd /tmp/openssl-1.1.0e && \
+#    ./config -shared -no-threads --prefix=/usr/local/ssl && make && make install_sw
 
 # Openssl 1.0.* for SRS.
 ADD openssl-OpenSSL_1_0_2u.tar.gz /tmp
