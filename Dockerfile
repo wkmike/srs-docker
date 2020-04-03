@@ -8,7 +8,7 @@ RUN yum install -y gcc gcc-c++ make patch sudo unzip perl zlib automake libtool 
     zlib-devel bzip2 bzip2-devel libxml2-devel
 
 # Libs path for srt(depends on ssl) and ffmpeg(depends on serval libs).
-ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/ssl/lib/pkgconfig
 
 # Openssl 1.1.* for SRS.
 # ADD openssl-1.1.0e.tar.bz2 /tmp
