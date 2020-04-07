@@ -61,10 +61,6 @@ COPY --from=build /usr/local/ssl /usr/local/ssl
 RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git \
     perf strace sysstat ethtool python2
 
-# Alias programs
-RUN alias ll="ls -lh"
-RUN alias python=python2
-
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
 RUN cd /tmp/CherryPy-3.2.4 && python2 setup.py install
