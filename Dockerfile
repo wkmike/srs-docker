@@ -62,8 +62,10 @@ RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unz
     perf strace sysstat ethtool epel-release python2
 # Depends on epel-release
 RUN yum install -y htop
+
 # Alias programs
 RUN alias ll="ls -lh"
+RUN alias python=python2
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
