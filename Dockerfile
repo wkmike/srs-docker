@@ -35,8 +35,7 @@ RUN cd /tmp/nasm-2.14 && ./configure && make && make install && \
     cd /tmp/speex-1.2rc1 && ./configure && make && make install && \
     cd /tmp/x264-snapshot-20181116-2245 && ./configure --disable-cli --enable-static && make && make install
 
-RUN export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && \
-    cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
+RUN cd /tmp/ffmpeg-4.2.1 && ./configure --enable-pthreads --extra-libs=-lpthread \
         --enable-gpl --enable-nonfree \
         --enable-postproc --enable-bzlib --enable-zlib \
         --enable-libx264 --enable-libmp3lame --enable-libfdk-aac --enable-libspeex \
