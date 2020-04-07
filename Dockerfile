@@ -53,12 +53,17 @@ FROM centos:8 as dist
 WORKDIR /tmp/srs
 
 # FFmpeg.
+COPY --from=build /usr/local/bin/nasm /usr/local/bin/nasm
 COPY --from=build /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
 COPY --from=build /usr/local/ssl /usr/local/ssl
 
 # Note that git is very important for codecov to discover the .codecov.yml
 RUN yum install -y gcc gcc-c++ make net-tools gdb lsof tree dstat redhat-lsb unzip zip git \
-    nasm perf strace sysstat ethtool epel-release htop
+    perf strace sysstat ethtool epel-release python2
+# Depends on epel-release
+RUN yum install -y htop
+# Alias programs
+RUN alias ll="ls -lh"
 
 # Install cherrypy for HTTP hooks.
 ADD CherryPy-3.2.4.tar.gz2 /tmp
