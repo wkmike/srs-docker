@@ -21,7 +21,7 @@ RUN set -ex; \
     rm -rf /var/lib/apt/lists/*;
 COPY ./srs.conf /srs/conf/docker.conf
 
-FROM debian:jessie-slim AS dist
+FROM jrottenberg/ffmpeg:4.1-vaapi AS dist
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 EXPOSE 1935 1985 8080
