@@ -1,11 +1,11 @@
-ARG SRS_VERSION=3.0.52
+ARG SRS_VERSION=3.0-b4
 
-FROM debian:jessie AS compile
+FROM ffmpeg:4.1-vaapi AS base
 
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
-ENV SRS_COMMIT=16050008172832d8dbe847940457e74e4f5669e4
-ENV SRS_CONFIGURE_ARGS=--with-ffmpeg
+ENV SRS_COMMIT=0081525380198d08e40492c378fd9fc6a79dca76
+ENV SRS_CONFIGURE_ARGS=
 
 RUN set -ex; \
     apt-get update; \
@@ -17,15 +17,14 @@ RUN set -ex; \
     ./configure --prefix=/srs ${SRS_CONFIGURE_ARGS}; \
     make; \
     make install; \
-    cp -HR objs/ffmpeg /srs/objs/; \
     rm -rf /tmp/*; \
     rm -rf /var/lib/apt/lists/*;
 COPY ./srs.conf /srs/conf/docker.conf
 
-FROM ffmpeg:4.1-vaapi AS dist
+FROM base AS dist
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 EXPOSE 1935 1985 8080
-COPY --from=compile /srs /srs
+COPY --from=base /srs /srs
 WORKDIR /srs
 CMD ["./objs/srs", "-c", "./conf/docker.conf"]
